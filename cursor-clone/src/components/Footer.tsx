@@ -33,12 +33,12 @@ export function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[#f8f8f8] pt-32 pb-16 px-6 border-t border-[#e2e2e2]">
+    <footer className="w-full bg-[#f8f8f8] pt-24 pb-12 px-6 border-t border-[#e2e2e2]">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         
         {/* Call to Action */}
         <div className="text-center mb-32 max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-black mb-8">
+          <h2 className="text-[32px] md:text-[40px] font-medium tracking-tight text-black mb-8">
             Ready to code faster?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

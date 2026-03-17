@@ -5,7 +5,7 @@ import { ArrowDownToLine } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative pt-[180px] pb-0 px-6 max-w-[1280px] mx-auto flex flex-col items-center">
+    <section className="relative pt-[180px] pb-0 px-6 max-w-[1300px] mx-auto flex flex-col items-center">
 
       {/* Hero Content */}
       <div className="w-full flex flex-col items-start mb-[60px] z-10 px-4">
@@ -13,7 +13,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[0.5rem] sm:text-[1rem] md:text-[1.5rem] lg:text-[2rem] leading-[1.1] tracking-[-0.02em] font-medium text-black max-w-[800px]"
+          className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] leading-[1.15] tracking-[-0.005em] font-bold text-black max-w-[700px]"
         >
           Built to make you extraordinarily productive,<br className="hidden md:block" />
           Cursor is the best way to code with AI.
@@ -39,13 +39,13 @@ export function Hero() {
         transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="w-full relative mt-12 mb-32 z-20"
       >
-        <div className="rounded-[1rem] border border-[#e2e2e2] bg-white shadow-2xl overflow-hidden aspect-[16/10] md:aspect-[16/9] w-full max-w-[1200px] mx-auto flex flex-col">
+        <div className="rounded-[12px] border border-black/[0.06] bg-white shadow-2xl overflow-hidden aspect-[16/10] md:aspect-[16/9] w-full max-w-[1200px] mx-auto flex flex-col">
           {/* Mockup Header */}
           <div className="h-12 bg-[#f3f3f3] border-b border-[#e2e2e2] flex items-center px-4 relative">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-              <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#d4d4d4]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#d4d4d4]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#d4d4d4]" />
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 text-xs font-medium text-black/40">
               Cursor

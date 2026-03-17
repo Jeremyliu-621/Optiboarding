@@ -17,25 +17,25 @@ function FeatureBlock({
   mockupBorderClass?: string;
 }) {
   return (
-    <div className={`w-full max-w-[1200px] bg-[#f5f5f5] rounded-[32px] overflow-hidden flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-stretch border border-[#ebebeb] mx-auto mb-6`}>
+    <div className={`w-full max-w-[1300px] bg-[#fafafa] rounded-[4px] overflow-hidden flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-stretch border border-black/[0.04] mx-auto min-h-[580px]`}>
       {/* Text Section */}
-      <div className="flex-1 py-[80px] px-[48px] flex flex-col justify-center max-w-[500px]">
-        <h2 className="text-[36px] leading-[1.2] font-semibold tracking-[-0.02em] text-[#000000]">
+      <div className="flex-[0.45] py-[80px] px-[48px] flex flex-col justify-center max-w-[400px]">
+        <h2 className="text-[22px] leading-[1.3] font-bold tracking-[-0.005em] text-[#000000]">
           {title}
         </h2>
-        <p className="text-[18px] leading-[1.5] text-[#666666] mt-5">
+        <p className="text-[16px] leading-[1.5] text-[#00000099] mt-4">
           {description}
         </p>
       </div>
 
       {/* Mockup Section */}
-      <div className={`flex-[1.2] w-full min-h-[500px] flex items-center justify-center p-8 lg:p-12`}>
-         <motion.div 
+      <div className={`flex-1 w-full min-h-[580px] flex items-center justify-center p-4 lg:p-6`}>
+         <motion.div
            initial={{ opacity: 0, scale: 0.98, y: 10 }}
            whileInView={{ opacity: 1, scale: 1, y: 0 }}
            viewport={{ once: true, margin: "-100px" }}
            transition={{ duration: 0.5, ease: "easeOut" }}
-           className={`relative w-full max-w-[540px] rounded-[16px] ${mockupBgClass} shadow-[0_30px_60px_-12px_rgba(0,0,0,0.15),0_18px_36px_-18px_rgba(0,0,0,0.1)] border ${mockupBorderClass} flex flex-col overflow-hidden`}
+           className={`relative w-full rounded-[8px] ${mockupBgClass} shadow-[0_30px_60px_-12px_rgba(0,0,0,0.15),0_18px_36px_-18px_rgba(0,0,0,0.1)] border ${mockupBorderClass} flex flex-col overflow-hidden`}
          >
            {mockupContent}
          </motion.div>
@@ -46,7 +46,7 @@ function FeatureBlock({
 
 export function FeatureGrid() {
   return (
-    <section className="bg-white">
+    <section className="bg-white px-6 flex flex-col items-center gap-3">
 
       
       <FeatureBlock 
@@ -109,9 +109,6 @@ export function FeatureGrid() {
           </div>
         }
       />
-
-      {/* Separator block 3 */}
-      <div className="w-full max-w-[1100px] mx-auto h-[1px] bg-[#f0f0f0]" />
 
       <FeatureBlock 
         title="Agents that write code."
