@@ -9,7 +9,7 @@ export function AgentFeatures() {
 
         {/* Left Text */}
         <div className="flex-[0.45] max-w-[420px] py-[80px] px-[48px] flex flex-col justify-center">
-          <h2 className="text-[22px] leading-[1.3] font-bold tracking-[-0.005em] text-[#000000]">
+          <h2 className="text-[22px] leading-[1.3] font-normal tracking-[-0.02em] text-[#000000]">
             Summaries, risk flags, and security scans on every PR
           </h2>
           <p className="text-[16px] leading-[1.5] text-[#00000099] mt-4">
@@ -148,7 +148,7 @@ export function AgentFeatures() {
 
         {/* Right Text */}
         <div className="flex-[0.45] max-w-[420px] py-[80px] px-[48px] flex flex-col justify-center">
-          <h2 className="text-[22px] leading-[1.3] font-bold tracking-[-0.005em] text-[#000000]">
+          <h2 className="text-[22px] leading-[1.3] font-normal tracking-[-0.02em] text-[#000000]">
             The engineering dashboard you&apos;ll actually check
           </h2>
           <p className="text-[16px] leading-[1.5] text-[#00000099] mt-4">

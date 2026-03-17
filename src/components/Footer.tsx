@@ -38,7 +38,7 @@ export function Footer() {
 
         {/* Call to Action */}
         <div className="text-center mb-20 max-w-2xl">
-          <h2 className="text-[32px] md:text-[40px] font-medium tracking-tight text-black mb-4">
+          <h2 className="text-[32px] md:text-[40px] font-normal tracking-[-0.02em] text-black mb-4">
             Start reviewing PRs in under 5 minutes
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
