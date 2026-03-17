@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 const testimonials = [
   {
     quote:
@@ -51,14 +47,10 @@ export function Testimonials() {
   return (
     <section className="bg-white px-6 pb-24">
       <div className="max-w-[1300px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {testimonials.map((t, i) => (
-            <motion.div
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {testimonials.map((t) => (
+            <div
               key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
               className="bg-[#fafafa] border border-black/[0.04] rounded-[4px] px-7 py-8 flex flex-col justify-between"
             >
               <p className="text-[15px] leading-[1.65] text-black">
@@ -77,7 +69,7 @@ export function Testimonials() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
