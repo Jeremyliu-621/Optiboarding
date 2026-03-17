@@ -2,27 +2,27 @@
 
 export function AgentFeatures() {
   return (
-    <section className="w-full flex flex-col items-center gap-3 px-6 py-24 bg-white">
+    <section className="w-full flex flex-col items-center gap-3 px-6 py-24">
 
       {/* Block 1: Optibot PR Reviews */}
-      <div className="w-full max-w-[1300px] bg-[#fafafa] rounded-[4px] overflow-hidden flex flex-col md:flex-row items-stretch border border-black/[0.04] min-h-[640px]">
+      <div className="w-full max-w-[1300px] bg-[var(--bg-surface)] rounded-[4px] overflow-hidden flex flex-col md:flex-row items-stretch min-h-[640px]">
 
         {/* Left Text */}
         <div className="flex-[0.45] max-w-[420px] py-[80px] px-[48px] flex flex-col justify-center">
-          <h2 className="text-[22px] leading-[1.3] font-normal tracking-[-0.02em] text-[#000000]">
+          <h2 className="text-[22px] leading-[1.3] font-normal tracking-[-0.02em] text-[var(--text-primary)]">
             Summaries, risk flags, and security scans on every PR
           </h2>
-          <p className="text-[16px] leading-[1.5] text-[#00000099] mt-4">
+          <p className="text-[16px] leading-[1.5] text-[var(--text-secondary)] mt-4">
             Optibot summarizes what changed, assesses risk, and flags security issues — automatically, on every pull request. 198 PRs reviewed in 6 weeks at Mpulse.
           </p>
-          <a href="#" className="inline-block text-[16px] underline text-[#e46a3d] mt-6 hover:opacity-80 transition-opacity">
+          <a href="#" className="inline-block text-[16px] no-underline text-[var(--accent)] mt-6 hover:underline hover:text-[var(--accent-hover)] transition-colors">
             See what Optibot catches →
           </a>
         </div>
 
-        {/* Right Mockup: PR Summary */}
+        {/* Right Mockup: PR Summary (light GitHub-style browser window) */}
         <div className="flex-1 relative w-full min-h-[500px] flex items-end justify-end pl-8">
-          <div className="w-[110%] h-[92%] bg-white rounded-tl-[12px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1),0_10px_20px_-5px_rgba(0,0,0,0.05)] border border-[#e5e5e5] border-r-0 border-b-0 flex flex-col overflow-hidden">
+          <div className="w-[110%] h-[92%] bg-white rounded-tl-[12px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.45),0_10px_20px_-5px_rgba(0,0,0,0.25)] border border-[#e5e5e5] border-r-0 border-b-0 flex flex-col overflow-hidden">
             {/* Chrome */}
             <div className="h-10 border-b border-[#e5e5e5] flex items-center px-5 bg-[#f8f8f8] text-[11px] text-[#878787] font-medium justify-between">
               <div className="flex gap-2">
@@ -82,11 +82,11 @@ export function AgentFeatures() {
       </div>
 
       {/* Block 2: Insights Dashboard */}
-      <div className="w-full max-w-[1300px] bg-[#fafafa] rounded-[4px] overflow-hidden flex flex-col-reverse md:flex-row items-stretch border border-black/[0.04] min-h-[640px]">
+      <div className="w-full max-w-[1300px] bg-[var(--bg-surface)] rounded-[4px] overflow-hidden flex flex-col-reverse md:flex-row items-stretch min-h-[640px]">
 
-        {/* Left Mockup: Dashboard */}
+        {/* Left Mockup: Dashboard (light GitHub-style browser window) */}
         <div className="flex-1 relative w-full min-h-[500px] flex items-end justify-start pr-8">
-          <div className="w-[110%] ml-[-30px] h-[92%] bg-white rounded-tr-[12px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1),0_10px_20px_-5px_rgba(0,0,0,0.05)] border border-[#e5e5e5] border-l-0 border-b-0 flex flex-col overflow-hidden">
+          <div className="w-[110%] ml-[-30px] h-[92%] bg-white rounded-tr-[12px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.45),0_10px_20px_-5px_rgba(0,0,0,0.25)] border border-[#e5e5e5] border-l-0 border-b-0 flex flex-col overflow-hidden">
             {/* Chrome */}
             <div className="h-10 border-b border-[#e5e5e5] flex items-center px-5 bg-[#f8f8f8] rounded-tr-[12px] justify-center text-[11px] text-[#878787] font-medium relative">
               <div className="flex gap-2 absolute left-5">
@@ -148,13 +148,13 @@ export function AgentFeatures() {
 
         {/* Right Text */}
         <div className="flex-[0.45] max-w-[420px] py-[80px] px-[48px] flex flex-col justify-center">
-          <h2 className="text-[22px] leading-[1.3] font-normal tracking-[-0.02em] text-[#000000]">
+          <h2 className="text-[22px] leading-[1.3] font-normal tracking-[-0.02em] text-[var(--text-primary)]">
             The engineering dashboard you&apos;ll actually check
           </h2>
-          <p className="text-[16px] leading-[1.5] text-[#00000099] mt-4">
+          <p className="text-[16px] leading-[1.5] text-[var(--text-secondary)] mt-4">
             PR cycle time, deploy frequency, contributor analytics, AI adoption rates — the numbers engineering managers actually need, without stitching together five tools.
           </p>
-          <a href="#" className="inline-block text-[16px] underline text-[#e46a3d] mt-6 hover:opacity-80 transition-opacity">
+          <a href="#" className="inline-block text-[16px] no-underline text-[var(--accent)] mt-6 hover:underline hover:text-[var(--accent-hover)] transition-colors">
             Explore Insights →
           </a>
         </div>

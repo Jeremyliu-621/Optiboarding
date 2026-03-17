@@ -878,12 +878,12 @@ export function Hero() {
       {/* Hero copy and stats */}
       <div className="w-full max-w-[1300px] mx-auto flex flex-col md:flex-row justify-between items-start border-b-0 mb-10 z-10">
         <div>
-          <h1 className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px] leading-[1.15] tracking-[-0.02em] font-normal text-black max-w-[680px]">
+          <h1 className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px] leading-[1.15] tracking-[-0.02em] font-normal text-[var(--text-primary)] max-w-[680px]">
             Understanding intent at scale, Optibot is the most comprehensive code
             review agent.
           </h1>
           <div className="flex items-center gap-3 mt-8">
-            <button className="flex items-center gap-2 border border-[#e2e2e2] bg-white hover:bg-[#f8f8f8] text-black px-5 py-3 rounded-full text-[15px] font-medium transition-colors">
+            <button className="flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--text-primary)] px-5 py-3 rounded-full text-[15px] font-medium transition-colors">
               Get Started — Free
             </button>
           </div>
@@ -892,12 +892,12 @@ export function Hero() {
         {/* Stats on the right */}
         <div className="flex flex-col gap-y-3 text-[14px] mt-8 md:mt-2 text-right">
           <div>
-            <span className="font-semibold text-black">2x more</span>
-            <span className="text-[#878787]"> security vulnerabilities caught</span>
+            <span className="font-semibold text-[var(--text-primary)]">2x more</span>
+            <span className="text-[var(--text-secondary)]"> security vulnerabilities caught</span>
           </div>
           <div>
-            <span className="font-semibold text-black">50% faster</span>
-            <span className="text-[#878787]"> PR review cycles</span>
+            <span className="font-semibold text-[var(--text-primary)]">50% faster</span>
+            <span className="text-[var(--text-secondary)]"> PR review cycles</span>
           </div>
         </div>
       </div>
@@ -916,7 +916,7 @@ export function Hero() {
               backgroundColor: GH.bg,
               overflow: "hidden",
               boxShadow:
-                "0 8px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05)",
+                "0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30)",
               fontFamily: GH.font,
               color: GH.fg,
             }}
