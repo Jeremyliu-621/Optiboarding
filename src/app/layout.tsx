@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cursor - The AI Code Editor",
-  description: "Built to make you extraordinarily productive, Cursor is the best way to code with AI.",
+  title: "Optimal AI — AI Code Review with Full Codebase Context",
+  description: "Optibot reviews every PR with full cross-repo context. Catch breaking changes, security issues, and risky patterns before they ship.",
 };
 
 export default function RootLayout({
