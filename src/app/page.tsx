@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { LogoWall } from "@/components/LogoWall";
 import { AgentFeatures } from "@/components/AgentFeatures";
 import { FeatureGrid } from "@/components/FeatureGrid";
+import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <LogoWall />
       <AgentFeatures />
       <FeatureGrid />
+      <Testimonials />
       <Footer />
     </main>
   );
