@@ -85,3 +85,38 @@ Changes made overnight (2026-03-17).
 `npm run build` — ✓ passes with zero errors.
 
 TypeScript: clean. Static pages: 2 (/, /_not-found).
+
+---
+
+## Hero PR Mockup Pixel-Accurate Rebuild — 2026-03-17 (tonight)
+
+Complete rewrite of the animated hero mockup using exact GitHub design tokens.
+
+### What changed
+
+**`src/components/Hero.tsx`** — Rebuilt from scratch with a `GH` constants object holding all verified GitHub Primer colors/fonts/spacing.
+
+**New 6-beat animation (14s loop):**
+
+| Beat | Duration | Content |
+|------|----------|---------|
+| `opened` | 2.6s | Timeline event + diff block (del/add lines with exact GitHub diff colors) |
+| `reviewing` | 2.2s | 2 timeline events + animated "Analyzing" status row with pulsing dots |
+| `comment` | 3.4s | Full GitHub review comment card — Bot badge, file path links, inline code |
+| `approved` | 2.2s | Commit icon + green approval checkmark events staggering in |
+| `merged` | 2.0s | Purple merge event + `#f6f4fe` merged banner |
+| `pause` | 1.8s | Hold before loop fade |
+
+**Pixel-accurate GitHub elements:**
+- Solid-fill badges: Open `#238636`, Merged `#8250df`, with real Primer SVG icons
+- Browser chrome: macOS traffic lights (red/yellow/green), centered URL bar
+- PR title: 20px, weight 600, `#1f2328`
+- Timeline: 2px `#d1d9e0` vertical connecting line, 20px avatar circles
+- Comment card: `border: 1px solid #d1d9e0`, `border-radius: 6px`, `#f6f8fa` header
+- Bot badge: `border: 1px solid #d1d9e0`, `border-radius: 2em`, `#656d76` text
+- Inline code: `rgba(175,184,193,0.2)` bg, `border-radius: 6px`
+- Diff: exact `#ffebe9`/`#ff8182` del and `#e6ffec`/`#4ac26b` add colors
+- Merged banner: `#f6f4fe` bg, `#d4c5f9` border, `#8250df` text
+- Font families: `-apple-system...` for UI, `ui-monospace SFMono-Regular...` for code
+
+**`DESIGN-TOKENS-PR.md`** — Created, documents all computed values used.

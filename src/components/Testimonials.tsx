@@ -45,26 +45,26 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="bg-white px-6 pb-24">
+    <section className="px-6 pb-24">
       <div className="max-w-[1300px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-[#fafafa] border border-black/[0.04] rounded-[4px] px-7 py-8 flex flex-col justify-between"
+              className="bg-[var(--bg-surface)] rounded-[4px] px-7 py-8 flex flex-col justify-between"
             >
-              <p className="text-[15px] leading-[1.65] text-black">
+              <p className="text-[15px] leading-[1.65] text-[var(--text-primary)]">
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div className="flex items-center gap-3 mt-7">
-                <div className="w-9 h-9 rounded-full bg-[#e46a3d]/10 text-[#e46a3d] text-[12px] font-bold flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-full bg-[var(--accent-muted)] text-[var(--accent)] text-[12px] font-bold flex items-center justify-center shrink-0">
                   {t.initials}
                 </div>
                 <div>
-                  <div className="text-[13px] font-semibold text-black leading-tight">
+                  <div className="text-[13px] font-semibold text-[var(--text-primary)] leading-tight">
                     {t.name}
                   </div>
-                  <div className="text-[12px] text-[#878787] mt-0.5">
+                  <div className="text-[12px] text-[var(--text-secondary)] mt-0.5">
                     {t.title}
                   </div>
                 </div>
