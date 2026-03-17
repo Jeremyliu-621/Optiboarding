@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function Hero() {
   return (
-    <section className="relative w-full pt-[180px] pb-0 px-6 flex flex-col items-center">
+    <section className="relative w-full pt-[100px] pb-0 px-6 flex flex-col items-center">
 
       {/* Hero Content */}
       <div className="w-full max-w-[1300px] mx-auto flex flex-col items-start mb-[60px] z-10">
@@ -12,7 +12,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] leading-[1.15] tracking-[-0.005em] font-bold text-black max-w-[700px]"
+          className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] leading-[1.15] tracking-[-0.02em] font-normal text-black max-w-[700px]"
         >
           Code review that understands your entire codebase
         </motion.h1>
