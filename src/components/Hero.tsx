@@ -823,29 +823,80 @@ function Sidebar({ stage }: { stage: number }) {
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
+function CardPatternBackground() {
+  const stroke = "rgba(255,255,255,0.28)";
+
+  const circleSet = (corner: "tl" | "tr" | "bl" | "br") => {
+    const baseSize = 260;
+    const gap = 80;
+
+    const common: React.CSSProperties = {
+      position: "absolute",
+      borderRadius: "9999px",
+      border: `1px solid ${stroke}`,
+      pointerEvents: "none",
+    };
+
+    const cornerOffset = (size: number) => {
+      const offset = -size / 2;
+      switch (corner) {
+        case "tl":
+          return { top: offset, left: offset };
+        case "tr":
+          return { top: offset, right: offset };
+        case "bl":
+          return { bottom: offset, left: offset };
+        case "br":
+          return { bottom: offset, right: offset };
+      }
+    };
+
+    return [0, 1, 2, 3].map((i) => {
+      const size = baseSize + i * gap;
+      return (
+        <div
+          key={`${corner}-${i}`}
+          style={{
+            ...common,
+            ...cornerOffset(size),
+            width: size,
+            height: size,
+          }}
+        />
+      );
+    });
+  };
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        background:
+          "radial-gradient(circle at center, rgba(0,0,0,0.35), transparent 55%)",
+        opacity: 0.9,
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
+    >
+      {circleSet("tl")}
+      {circleSet("tr")}
+      {circleSet("bl")}
+      {circleSet("br")}
+    </div>
+  );
+}
+
 export function Hero() {
   const [stage, setStage] = useState(0);
-  const [fading, setFading] = useState(false);
 
-  // Advance stages
+  // Advance stages, stop at MAX_STAGE
   useEffect(() => {
-    if (fading) return;
-    const timer = setTimeout(() => {
-      if (stage === MAX_STAGE) setFading(true);
-      else setStage((s) => s + 1);
-    }, STAGE_DURATIONS[stage]);
+    if (stage === MAX_STAGE) return;
+    const timer = setTimeout(() => setStage((s) => s + 1), STAGE_DURATIONS[stage]);
     return () => clearTimeout(timer);
-  }, [stage, fading]);
-
-  // Fade out → reset → fade in
-  useEffect(() => {
-    if (!fading) return;
-    const timer = setTimeout(() => {
-      setStage(0);
-      setFading(false);
-    }, FADE_MS);
-    return () => clearTimeout(timer);
-  }, [fading]);
+  }, [stage]);
 
   const merged = stage >= 5;
 
@@ -858,8 +909,7 @@ export function Hero() {
       <div className="w-full max-w-[1300px] mx-auto flex flex-col md:flex-row justify-between items-start border-b-0 mb-10 z-10">
         <div>
           <h1 className="text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px] leading-[1.15] tracking-[-0.02em] font-normal text-[var(--text-primary)] max-w-[680px]">
-            Understanding intent at scale, Optibot is the most comprehensive code
-            review agent.
+            Understanding intent at scale, <br /> Optibot makes code review scalable.
           </h1>
           <div className="flex items-center gap-3 mt-8">
             <button className="flex items-center gap-2 bg-[var(--text-primary)] hover:bg-white text-[var(--bg-deep)] px-5 py-3 rounded-full text-[15px] font-medium transition-colors">
@@ -882,14 +932,18 @@ export function Hero() {
       </div>
 
       {/* Mockup card */}
-      <div className="w-full max-w-[1300px] mx-auto mb-24 z-20">
-        <motion.div
-          animate={{ opacity: fading ? 0 : 1, scale: fading ? 0.988 : 1 }}
-          transition={{ duration: FADE_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
-        >
+      <div
+        className="w-full max-w-[1300px] mx-auto bg-[var(--bg-surface)] rounded-[4px] overflow-hidden p-4 md:p-12 mb-24 z-20"
+        style={{ position: "relative" }}
+      >
+        <CardPatternBackground />
+        <div>
           {/* Root container — font set here so everything inherits */}
           <div
+            className="w-full max-w-[1100px] mx-auto"
             style={{
+              position: "relative",
+              zIndex: 1,
               border: `1px solid ${GH.border}`,
               borderRadius: 12,
               backgroundColor: GH.bg,
@@ -1171,7 +1225,7 @@ export function Hero() {
               <Sidebar stage={stage} />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
