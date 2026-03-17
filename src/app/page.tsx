@@ -4,7 +4,7 @@ import { LogoWall } from "@/components/LogoWall";
 import { AgentFeatures } from "@/components/AgentFeatures";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { Testimonials } from "@/components/Testimonials";
-import { Footer } from "@/components/Footer";
+import { Footer, FooterCTA } from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -15,6 +15,7 @@ export default function Home() {
       <AgentFeatures />
       <FeatureGrid />
       <Testimonials />
+      <FooterCTA />
       <Footer />
     </main>
   );

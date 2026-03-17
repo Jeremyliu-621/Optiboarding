@@ -28,5 +28,15 @@
     "id": "update-button-colors",
     "task": "Update 'Get Started' and 'Get a Demo' button colors to dark purple text on a whitish background",
     "status": "completed"
+  },
+  {
+    "id": "add-hero-background",
+    "task": "Add a 1300px full-width background container to the Hero pseudo-window, and make the window 1100px thinner",
+    "status": "completed"
+  },
+  {
+    "id": "stop-hero-animation-loop",
+    "task": "Stop the Hero window from fading and looping at the end of its animations",
+    "status": "not-started"
   }
 ]
