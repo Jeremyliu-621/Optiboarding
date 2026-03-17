@@ -42,10 +42,10 @@ export function Footer() {
             Start reviewing PRs in under 5 minutes
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button className="rounded-full h-12 px-8 text-lg">
+            <Button className="rounded-full h-12 px-8 text-lg bg-[var(--text-primary)] hover:bg-white text-[var(--bg-deep)]">
               Get a Demo
             </Button>
-            <Button variant="outline" className="rounded-full h-12 px-8 text-lg">
+            <Button variant="outline" className="rounded-full h-12 px-8 text-lg border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-deep)]">
               Get Started — Free
             </Button>
           </div>

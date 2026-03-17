@@ -5,18 +5,20 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
+import Image from "next/image";
+
 export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 flex justify-center w-full transition-all duration-300 px-6 border-b border-[var(--border-subtle)]"
+        "fixed top-0 left-0 right-0 z-50 flex justify-center w-full transition-all duration-300 px-6"
       )}
       style={{ backgroundColor: "var(--bg-deep)" }}
     >
       <div className="flex h-12 w-full max-w-[1300px] items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="w-5 h-5 rounded-[5px] bg-[#e46a3d]" />
-          <span className="text-[17px] font-bold tracking-tight text-[var(--text-primary)]">Optimal AI</span>
+        <div className="flex items-center gap-0.75">
+          <Image src="/optimalaismalllogo.png" alt="Optimal AI" width={25} height={25} className="rounded shrink-0" />
+          <span className="text-[18px] leading-none mt-[2px] font-normal tracking-[-0.02em] text-[var(--text-primary)]" style={{ fontFamily: "var(--font-heading)" }}>Optimal AI</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -35,7 +37,7 @@ export function Navbar() {
           <Link href="#" className="hidden sm:inline-block text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             Sign in
           </Link>
-          <Button className="rounded-full h-9 px-5">
+          <Button className="rounded-full h-9 px-5 bg-[var(--text-primary)] hover:bg-white text-[var(--bg-deep)]">
             Get a Demo
           </Button>
         </div>

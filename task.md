@@ -23,5 +23,10 @@
     "id": "fix-featuregrid-typography",
     "task": "Fix FeatureGrid spacing and headings",
     "status": "completed"
+  },
+  {
+    "id": "update-button-colors",
+    "task": "Update 'Get Started' and 'Get a Demo' button colors to dark purple text on a whitish background",
+    "status": "completed"
   }
 ]

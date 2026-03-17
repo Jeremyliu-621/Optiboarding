@@ -5,36 +5,42 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ── GitHub Design Tokens ──────────────────────────────────────────────────────
 const GH = {
-  bg: "#ffffff",
-  bgSubtle: "#f6f8fa",
-  border: "#d1d9e0",
-  fg: "#1f2328",
-  fgMuted: "#656d76",
-  link: "#0969da",
+  bg:           "#0d1117",
+  bgSubtle:     "#151b23",
+  bgTimeline:   "#212830",
+  border:       "#3d444d",
+  borderMuted:  "#3d444db3",
+  fg:           "#f0f6fc",
+  fgMuted:      "#9198a1",
+  link:         "#4493f8",
   font: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif',
   mono: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
-  openBg: "#238636",
-  mergedBg: "#8250df",
-  mergedBannerBg: "#f6f4fe",
-  mergedBannerBorder: "#d4c5f9",
-  approvalGreen: "#1a7f37",
-  orange: "#e46a3d",
-  diffDelBg: "#ffebe9",
-  diffDelBorder: "#ff8182",
-  diffDelText: "#82071e",
-  diffAddBg: "#e6ffec",
-  diffAddBorder: "#4ac26b",
-  diffAddText: "#116329",
-  diffHunkBg: "#ddf4ff",
-  diffHunkText: "#0550ae",
-  codeBg: "rgba(175,184,193,0.2)",
+  openBg:            "#238636",
+  mergedBg:          "#8957e5",
+  mergedFg:          "#ab7df8",
+  mergedBannerBg:    "#ab7df826",
+  mergedBannerBorder:"#ab7df866",
+  approvalGreen:     "#3fb950",
+  orange:            "#e46a3d",
+  diffDelBg:         "#f851491a",
+  diffDelBorder:     "#f85149",
+  diffDelNumBg:      "#f851494d",
+  diffDelText:       "#f0f6fc",
+  diffAddBg:         "#2ea04326",
+  diffAddBorder:     "#3fb950",
+  diffAddNumBg:      "#3fb9504d",
+  diffAddText:       "#f0f6fc",
+  diffHunkBg:        "#388bfd1a",
+  diffHunkText:      "#9198a1",
+  codeBg:            "rgba(110,118,129,0.4)",
+  attentionFg:       "#d29922",
 } as const;
 
 // ── Stage timing ──────────────────────────────────────────────────────────────
 // 0=opened 1=reviewing 2=comment 3=committed 4=approved 5=merged 6=hold
-const STAGE_DURATIONS = [2400, 1800, 3000, 1500, 1500, 2000, 1800];
+const STAGE_DURATIONS = [2400, 1800, 3000, 1500, 1500, 2200, 2800];
 const MAX_STAGE = 6;
-const FADE_MS = 400;
+const FADE_MS = 1100;
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
@@ -243,6 +249,21 @@ function TimelineRow({
 // ── Diff block ────────────────────────────────────────────────────────────────
 
 function DiffBlock() {
+  const ln = (content: string | number, bg: string): React.CSSProperties => ({
+    width: 34,
+    minWidth: 34,
+    padding: "0 8px",
+    textAlign: "right",
+    fontSize: 11,
+    lineHeight: "20px",
+    color: GH.fgMuted,
+    backgroundColor: bg,
+    userSelect: "none" as const,
+    flexShrink: 0,
+    fontFamily: GH.mono,
+    borderRight: `1px solid ${GH.border}`,
+  });
+
   return (
     <div
       style={{
@@ -256,112 +277,69 @@ function DiffBlock() {
         marginLeft: 32,
       }}
     >
+      {/* File header */}
       <div
         style={{
           backgroundColor: GH.bgSubtle,
           borderBottom: `1px solid ${GH.border}`,
           padding: "6px 16px",
           color: GH.fg,
+          fontSize: 12,
           fontWeight: 600,
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
         }}
       >
+        <svg width="12" height="12" viewBox="0 0 16 16" fill={GH.fgMuted}>
+          <path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z" />
+        </svg>
         auth-service/src/users.ts
       </div>
+
       {/* Hunk header */}
-      <div
-        style={{
-          display: "flex",
-          backgroundColor: GH.diffHunkBg,
-          padding: "1px 10px",
-        }}
-      >
-        <span style={{ color: GH.diffHunkText, opacity: 0.8 }}>
-          @@ -12,7 +12,7 @@
+      <div style={{ display: "flex", backgroundColor: GH.diffHunkBg }}>
+        <span style={ln("", GH.diffHunkBg)} />
+        <span style={ln("", GH.diffHunkBg)} />
+        <span style={{ padding: "0 12px", color: GH.diffHunkText, flex: 1 }}>
+          @@ -12,7 +12,7 @@ export async function getUserById
         </span>
       </div>
-      {/* Context */}
-      <div style={{ display: "flex", backgroundColor: GH.bg, padding: "1px 0" }}>
-        <span
-          style={{
-            width: 28,
-            textAlign: "center",
-            color: GH.fgMuted,
-            opacity: 0.4,
-            userSelect: "none",
-            flexShrink: 0,
-          }}
-        >
-          {" "}
-        </span>
-        <span style={{ color: GH.fg, paddingLeft: 4, paddingRight: 16 }}>
-          {"  return db.query<User>({ table: 'users', where: { id } });"}
+
+      {/* Context line */}
+      <div style={{ display: "flex", backgroundColor: GH.bg }}>
+        <span style={ln("", GH.bg)}>11</span>
+        <span style={ln("", GH.bg)}>11</span>
+        <span style={{ padding: "0 12px", color: GH.fgMuted, flex: 1 }}>
+          {"  const conn = await db.connect(config);"}
         </span>
       </div>
+
       {/* Deletion */}
-      <div
-        style={{
-          display: "flex",
-          backgroundColor: GH.diffDelBg,
-          borderLeft: `4px solid ${GH.diffDelBorder}`,
-          padding: "1px 0",
-        }}
-      >
-        <span
-          style={{
-            width: 24,
-            textAlign: "center",
-            color: GH.diffDelText,
-            opacity: 0.7,
-            userSelect: "none",
-            flexShrink: 0,
-          }}
-        >
-          -
-        </span>
-        <span style={{ color: GH.diffDelText, paddingLeft: 4, paddingRight: 16 }}>
+      <div style={{ display: "flex", backgroundColor: GH.diffDelBg }}>
+        <span style={{ ...ln("", GH.diffDelNumBg), color: GH.diffDelBorder }}>12</span>
+        <span style={{ ...ln("", GH.diffDelNumBg) }} />
+        <span style={{ padding: "0 12px", color: GH.diffDelText, flex: 1 }}>
+          <span style={{ color: GH.diffDelBorder, userSelect: "none", marginRight: 4 }}>-</span>
           {"export async function getUserById(id: string) {"}
         </span>
       </div>
+
       {/* Addition */}
-      <div
-        style={{
-          display: "flex",
-          backgroundColor: GH.diffAddBg,
-          borderLeft: `4px solid ${GH.diffAddBorder}`,
-          padding: "1px 0",
-        }}
-      >
-        <span
-          style={{
-            width: 24,
-            textAlign: "center",
-            color: GH.diffAddText,
-            opacity: 0.7,
-            userSelect: "none",
-            flexShrink: 0,
-          }}
-        >
-          +
-        </span>
-        <span style={{ color: GH.diffAddText, paddingLeft: 4, paddingRight: 16 }}>
+      <div style={{ display: "flex", backgroundColor: GH.diffAddBg }}>
+        <span style={{ ...ln("", GH.diffAddNumBg) }} />
+        <span style={{ ...ln("", GH.diffAddNumBg), color: GH.diffAddBorder }}>12</span>
+        <span style={{ padding: "0 12px", color: GH.diffAddText, flex: 1 }}>
+          <span style={{ color: GH.diffAddBorder, userSelect: "none", marginRight: 4 }}>+</span>
           {"export async function fetchUser(id: string) {"}
         </span>
       </div>
-      {/* Context */}
-      <div style={{ display: "flex", backgroundColor: GH.bg, padding: "1px 0" }}>
-        <span
-          style={{
-            width: 28,
-            textAlign: "center",
-            color: GH.fgMuted,
-            opacity: 0.4,
-            userSelect: "none",
-            flexShrink: 0,
-          }}
-        >
-          {" "}
-        </span>
-        <span style={{ color: GH.fg, paddingLeft: 4, paddingRight: 16 }}>
+
+      {/* Context line */}
+      <div style={{ display: "flex", backgroundColor: GH.bg }}>
+        <span style={ln("", GH.bg)}>13</span>
+        <span style={ln("", GH.bg)}>13</span>
+        <span style={{ padding: "0 12px", color: GH.fgMuted, flex: 1 }}>
           {"  const user = await db.find(id);"}
         </span>
       </div>
@@ -501,7 +479,7 @@ function MergedBanner() {
       >
         <IconMerged size={14} />
       </div>
-      <span style={{ fontSize: 14, fontWeight: 600, color: GH.mergedBg }}>
+      <span style={{ fontSize: 14, fontWeight: 600, color: GH.mergedFg }}>
         Pull request successfully merged and closed
       </span>
     </div>
@@ -557,13 +535,13 @@ function Timeline({ stage }: { stage: number }) {
         {/* ── Stage 0: drmaeur opened ── */}
         <TimelineRow
           icon={
-            <EventIcon bg="#e6ffec">
+            <EventIcon bg={GH.bgTimeline} border={`2px solid ${GH.border}`} color={GH.approvalGreen}>
               <div
                 style={{
-                  width: 10,
-                  height: 10,
+                  width: 8,
+                  height: 8,
                   borderRadius: "50%",
-                  backgroundColor: GH.approvalGreen,
+                  backgroundColor: GH.openBg,
                 }}
               />
             </EventIcon>
@@ -768,7 +746,7 @@ function Sidebar({ stage }: { stage: number }) {
               width: 20,
               height: 20,
               borderRadius: "50%",
-              backgroundColor: "#8250df",
+              backgroundColor: GH.mergedBg,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -809,10 +787,11 @@ function Sidebar({ stage }: { stage: number }) {
           style={{
             fontSize: 12,
             fontWeight: 500,
-            backgroundColor: "#ddf4ff",
-            color: "#0550ae",
+            backgroundColor: GH.diffHunkBg,
+            color: GH.link,
             padding: "2px 8px",
             borderRadius: "2em",
+            border: `1px solid ${GH.border}`,
           }}
         >
           refactor
@@ -883,7 +862,7 @@ export function Hero() {
             review agent.
           </h1>
           <div className="flex items-center gap-3 mt-8">
-            <button className="flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--text-primary)] px-5 py-3 rounded-full text-[15px] font-medium transition-colors">
+            <button className="flex items-center gap-2 bg-[var(--text-primary)] hover:bg-white text-[var(--bg-deep)] px-5 py-3 rounded-full text-[15px] font-medium transition-colors">
               Get Started — Free
             </button>
           </div>
@@ -905,8 +884,8 @@ export function Hero() {
       {/* Mockup card */}
       <div className="w-full max-w-[1300px] mx-auto mb-24 z-20">
         <motion.div
-          animate={{ opacity: fading ? 0 : 1 }}
-          transition={{ duration: FADE_MS / 1000, ease: "easeInOut" }}
+          animate={{ opacity: fading ? 0 : 1, scale: fading ? 0.988 : 1 }}
+          transition={{ duration: FADE_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
         >
           {/* Root container — font set here so everything inherits */}
           <div
@@ -916,7 +895,7 @@ export function Hero() {
               backgroundColor: GH.bg,
               overflow: "hidden",
               boxShadow:
-                "0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30)",
+                "0 0 0 1px rgba(255,255,255,0.04), 0 24px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)",
               fontFamily: GH.font,
               color: GH.fg,
             }}

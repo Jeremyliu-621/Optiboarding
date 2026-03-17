@@ -1,0 +1,45 @@
+{
+  "tokens": {
+    "--color-canvas-default": "",
+    "--color-canvas-subtle": "",
+    "--color-canvas-inset": "",
+    "--color-border-default": "",
+    "--color-border-muted": "",
+    "--color-fg-default": "",
+    "--color-fg-muted": "",
+    "--color-fg-on-emphasis": "",
+    "--color-accent-fg": "",
+    "--color-accent-emphasis": "",
+    "--color-success-fg": "",
+    "--color-success-emphasis": "",
+    "--color-attention-fg": "",
+    "--color-attention-subtle": "",
+    "--color-danger-fg": "",
+    "--color-danger-subtle": "",
+    "--color-done-fg": "",
+    "--color-done-emphasis": "",
+    "--color-done-subtle": "",
+    "--color-diff-blob-deletion-num-bg": "",
+    "--color-diff-blob-addition-num-bg": ""
+  },
+  "extraTokens": {
+    "--color-diff-blob-deletion-line-bg": "",
+    "--color-diff-blob-addition-line-bg": "",
+    "--color-diff-blob-deletion-word-bg": "",
+    "--color-diff-blob-addition-word-bg": "",
+    "--color-neutral-muted": "",
+    "--color-neutral-subtle": "",
+    "--color-scale-gray-0": "",
+    "--color-scale-gray-1": "",
+    "--color-scale-gray-2": "",
+    "--color-scale-gray-3": "",
+    "--color-scale-gray-9": "",
+    "--color-scale-gray-8": "",
+    "--color-scale-gray-7": ""
+  },
+  "elementStyles": {
+    "body-bg": "rgb(13, 17, 23)",
+    "comment-bg": "rgba(0, 0, 0, 0)",
+    "comment-border": "rgb(145, 152, 161)"
+  }
+}
