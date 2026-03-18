@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { LogoWall } from "@/components/LogoWall";
+import { Comparison } from "@/components/Comparison";
 import { AgentFeatures } from "@/components/AgentFeatures";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { Testimonials } from "@/components/Testimonials";
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <LogoWall />
+      <Comparison />
       <AgentFeatures />
       <FeatureGrid />
       <Testimonials />

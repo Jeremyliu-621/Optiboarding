@@ -48,3 +48,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--accent-muted);
   color: var(--text-primary);
 }
+
+/* Hide scrollbar but allow scrolling */
+.sidebar-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sidebar-scroll::-webkit-scrollbar {
+  display: none;
+}
