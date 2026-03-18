@@ -8,7 +8,7 @@ You're running overnight. The human is asleep. When they wake up, two things mus
 
 The site has inconsistencies. You are a senior product designer doing a QA pass. Fix everything.
 
-### What's wrong (the human told you):
+### What's wrong (the human told you):  
 
 **Font inconsistency.** The hero heading ("Code review that understands your entire codebase") uses a different visual style than other headings on the page. The human wants the hero heading font/weight to be the reference — all other headings should feel like they belong to the same family. The hero heading should also be **smaller** than it currently is. Look at cursor.com/home for reference on how large hero text should be relative to the page.
 
