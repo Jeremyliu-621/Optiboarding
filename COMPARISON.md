@@ -60,9 +60,9 @@ Whatever layout you choose, the code examples should look realistic — use mono
 
 ## Rules
 
-- No animations, no interactivity, no tabs, no buttons
+- No animations, no tabs, no buttons. tasteful interactivity is okay.
 - Use existing site styling (check DESIGN-TOKENS.md for consistent values)
-- Keep it light mode
-- No external images
+- Keep the styling with other sections consistent. it shouldn't look out of place or confusing.
+- external images are okay, but optional.
 - The section should have a heading, but doesn't need to be "Comparisons" — pick something that sounds natural
 - This section can be tall — it's a key selling point, give it room to breathe
