@@ -57,3 +57,58 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-scroll::-webkit-scrollbar {
   display: none;
 }
+
+/* Pulse glow for active indicators */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(140, 40%, 45%, 0.4); }
+  50% { box-shadow: 0 0 0 4px hsla(140, 40%, 45%, 0); }
+}
+.pulse-active {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Focus ring for form elements */
+.focus-ring:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px hsla(275, 35%, 55%, 0.2);
+}
+
+/* Smooth toggle transition */
+.toggle-track {
+  transition: background-color 0.2s ease;
+}
+.toggle-thumb {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* Shimmer for premium loading states */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 25%,
+    hsl(275, 10%, 18%) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Subtle glow for accent elements */
+.accent-glow {
+  box-shadow: 0 0 20px hsla(275, 35%, 55%, 0.15);
+}
