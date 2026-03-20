@@ -149,3 +149,27 @@ h6 {
 .accent-glow {
   box-shadow: 0 0 20px hsla(275, 35%, 55%, 0.15);
 }
+
+/* React Flow dark theme overrides */
+.codebase-map-flow .react-flow__node {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.codebase-map-flow .react-flow__handle {
+  transition: opacity 0.15s ease;
+}
+
+.codebase-map-flow .react-flow__edge-interaction {
+  stroke-width: 20;
+}
+
+.codebase-map-flow .react-flow__controls button svg {
+  fill: var(--text-secondary);
+}
+
+.codebase-map-flow .react-flow__minimap {
+  border-radius: 8px;
+}

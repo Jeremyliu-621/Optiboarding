@@ -8,7 +8,6 @@ import { ChevronRight, X, Sparkles, Check, GitFork, Settings, Users as UsersIcon
 import { FeatureCards } from "@/components/dashboard/FeatureCards";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { OptibotInsights } from "@/components/dashboard/OptibotInsights";
-import { BeforeAfterStats } from "@/components/dashboard/BeforeAfterStats";
 import { ImprovementGraph } from "@/components/dashboard/ImprovementGraph";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -290,8 +289,7 @@ export default function DashboardPage() {
       <SetupChecklist />
 
       {/* Feature cards */}
-      <div className="mb-10">
-        <h3 className="text-[13px] font-medium uppercase tracking-wider text-[var(--text-muted)] mb-3">Tools</h3>
+      <div className="mb-10 mt-4">
         <FeatureCards />
       </div>
 
