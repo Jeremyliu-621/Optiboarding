@@ -16,6 +16,8 @@ interface GitHubEvent {
       state: string;
       merged?: boolean;
       user: { login: string; avatar_url: string };
+      additions?: number;
+      deletions?: number;
     };
     review?: {
       state: string;
@@ -76,22 +78,26 @@ function getEventInfo(event: GitHubEvent) {
     time: relativeTime(event.created_at),
     avatar: pr.user?.avatar_url,
     author: pr.user?.login,
+    additions: pr.additions || 0,
+    deletions: pr.deletions || 0,
   };
 }
 
 export function RecentActivity({ events, loading, error }: RecentActivityProps) {
   const prEvents = events
     .filter((e) => e.type === "PullRequestEvent" || e.type === "PullRequestReviewEvent")
-    .slice(0, 8);
+    .slice(0, 3);
 
   return (
     <div>
-      <h3 className="text-[14px] font-medium text-[var(--text-primary)] mb-4">
+      <h3 className="text-[12px] font-medium uppercase tracking-wider text-[var(--text-muted)] mb-3">
         Recent Activity
       </h3>
 
+      <div className="flex flex-col">
+
       {error && (
-        <div className="bg-[var(--bg-surface)] rounded-[8px] p-5 text-center">
+        <div className="rounded-[8px] p-5 text-center">
           <p className="text-[13px] text-[var(--text-muted)] mb-3">
             Couldn&apos;t load activity — try refreshing.
           </p>
@@ -119,7 +125,7 @@ export function RecentActivity({ events, loading, error }: RecentActivityProps) 
       )}
 
       {!loading && !error && prEvents.length === 0 && (
-        <div className="bg-[var(--bg-surface)] rounded-[8px] p-8 text-center">
+        <div className="rounded-[8px] p-8 text-center">
           <div className="w-14 h-14 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center mx-auto mb-3">
             <GitFork size={24} className="text-[var(--text-muted)]" />
           </div>
@@ -150,40 +156,64 @@ export function RecentActivity({ events, loading, error }: RecentActivityProps) 
               <motion.div
                 key={event.id}
                 variants={{
-                  hidden: { opacity: 0, x: -8 },
-                  show: { opacity: 1, x: 0, transition: { duration: 0.2 } },
+                  hidden: { opacity: 0, y: 4 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.2 } },
                 }}
-                className="flex items-start gap-3 p-3 rounded-[6px] hover:bg-[var(--bg-elevated)] transition-colors"
+                className="group flex items-center gap-4 py-4 border-b border-[var(--card-border)] last:border-0 hover:bg-[rgba(255,255,255,0.02)] px-4 -mx-4 rounded-lg transition-colors cursor-pointer"
               >
-                {info.avatar ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={info.avatar}
-                    alt={info.author || ""}
-                    className="w-7 h-7 rounded-full shrink-0 mt-0.5"
-                  />
-                ) : (
-                  <info.icon
-                    size={18}
-                    className="shrink-0 mt-1"
-                    style={{ color: info.statusColor }}
-                  />
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="text-[13px] text-[var(--text-primary)] truncate">
-                    {info.title}
-                  </p>
-                  <p className="text-[12px] text-[var(--text-muted)] mt-0.5">
-                    {info.repo} #{info.number} ·{" "}
-                    <span style={{ color: info.statusColor }}>{info.status}</span>{" "}
-                    · {info.time}
-                  </p>
+                <div className="relative shrink-0">
+                  {info.avatar ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={info.avatar}
+                      alt={info.author || ""}
+                      className="w-10 h-10 rounded-full border border-[var(--border-subtle)] object-cover"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex items-center justify-center">
+                      <info.icon size={18} style={{ color: info.statusColor }} />
+                    </div>
+                  )}
+                  {info.avatar && (
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[var(--bg-deep)] flex items-center justify-center border border-[var(--card-border)]">
+                      <info.icon size={10} style={{ color: info.statusColor }} />
+                    </div>
+                  )}
+                </div>
+
+                <div className="min-w-0 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[14px] font-medium text-[var(--text-primary)] truncate group-hover:text-[var(--accent)] transition-colors">
+                      {info.title}
+                    </span>
+                    <span className="text-[14px] text-[var(--text-muted)] group-hover:text-[var(--text-secondary)] transition-colors shrink-0">
+                      #{info.number}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[13px] text-[var(--text-secondary)]">
+                    <span className="font-medium text-[var(--text-primary)]">{info.repo}</span>
+                    <span className="text-[var(--text-muted)]">•</span>
+                    <span style={{ color: info.statusColor }}>{info.status}</span>
+                    <span className="text-[var(--text-muted)]">•</span>
+                    <span className="truncate">by {info.author}</span>
+                  </div>
+                </div>
+
+                <div className="shrink-0 flex items-center gap-4 text-[13px] text-[var(--text-muted)]">
+                  {(info.additions > 0 || info.deletions > 0) && (
+                    <span className="hidden sm:flex items-center font-mono bg-[var(--bg-surface)] px-2 py-0.5 rounded text-[12px] border border-[var(--card-border)] group-hover:border-[rgba(255,255,255,0.1)] transition-colors gap-2">
+                      {info.additions > 0 && <span className="text-[#3fb950]">+{info.additions}</span>}
+                      {info.deletions > 0 && <span className="text-[#f85149]">-{info.deletions}</span>}
+                    </span>
+                  )}
+                  <span className="whitespace-nowrap">{info.time}</span>
                 </div>
               </motion.div>
             );
           })}
         </motion.div>
       )}
+      </div>
     </div>
   );
 }

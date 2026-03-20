@@ -36,23 +36,17 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          {session ? (
-            <Link href="/dashboard" className="hidden sm:inline-block text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-              Dashboard
-            </Link>
-          ) : (
-            <button
-              onClick={() => signIn("github")}
-              className="hidden sm:inline-block text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-            >
-              Sign in
-            </button>
-          )}
+          <button
+            onClick={() => session ? window.location.href = "/dashboard" : signIn("github")}
+            className="hidden sm:inline-block text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+          >
+            Sign in
+          </button>
           <Button
             onClick={() => session ? window.location.href = "/dashboard" : signIn("github")}
             className="rounded-full h-9 px-5 bg-[var(--text-primary)] hover:bg-white text-[var(--bg-deep)] cursor-pointer"
           >
-            {session ? "Dashboard" : "Get a Demo"}
+            Get a Demo
           </Button>
         </div>
       </div>

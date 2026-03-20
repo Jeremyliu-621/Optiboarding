@@ -205,7 +205,7 @@ export function Sidebar({ open, onClose, collapsed }: SidebarProps) {
         style={{ width: collapsed ? "56px" : "220px" }}
         className={`
           fixed top-0 left-0 h-full z-50
-          bg-[var(--bg-surface)] flex flex-col
+          bg-[var(--bg-sidebar)] border-r border-[rgba(255,255,255,0.06)] flex flex-col
           transition-[transform,width] duration-200 ease-in-out
           lg:translate-x-0
           ${open ? "translate-x-0" : "-translate-x-full"}
