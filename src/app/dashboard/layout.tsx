@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Header } from "@/components/dashboard/Header";
+import { OnboardingWizard } from "@/components/dashboard/OnboardingWizard";
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true);
@@ -28,7 +29,14 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const isDesktop = useIsDesktop();
+
+  useEffect(() => {
+    if (status === "authenticated" && !localStorage.getItem("optimal-onboarded")) {
+      setShowOnboarding(true);
+    }
+  }, [status]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -79,6 +87,19 @@ export default function DashboardLayout({
           </AnimatePresence>
         </main>
       </div>
+
+      <AnimatePresence>
+        {showOnboarding && (
+          <OnboardingWizard
+            userName={session.user?.name || undefined}
+            userImage={session.user?.image || undefined}
+            onComplete={() => {
+              localStorage.setItem("optimal-onboarded", "true");
+              setShowOnboarding(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

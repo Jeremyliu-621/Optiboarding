@@ -7,7 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, X, Sparkles, Check, GitFork, Settings, Users as UsersIcon } from "lucide-react";
 import { FeatureCards } from "@/components/dashboard/FeatureCards";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
-import { QuickSetup } from "@/components/dashboard/QuickSetup";
+import { OptibotInsights } from "@/components/dashboard/OptibotInsights";
+import { BeforeAfterStats } from "@/components/dashboard/BeforeAfterStats";
+import { ImprovementGraph } from "@/components/dashboard/ImprovementGraph";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GitHubEvent = any;
@@ -125,8 +127,8 @@ function SetupChecklist() {
   const progress = (doneCount / checklistItems.length) * 100;
 
   return (
-    <div className="mb-8 bg-[var(--bg-surface)] rounded-[10px] p-5">
-      <div className="flex items-center justify-between mb-3">
+    <div className="mb-8 border border-[var(--border-subtle)] rounded-[8px] overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsla(275, 35%, 55%, 0.06), var(--bg-surface) 60%)' }}>
+      <div className="flex items-center justify-between p-4 border-b border-[var(--border-subtle)]">
         <h3 className="text-[14px] font-medium text-[var(--text-primary)]">
           Getting Started
           <span className="ml-2 text-[12px] text-[var(--text-muted)] font-normal">
@@ -136,20 +138,21 @@ function SetupChecklist() {
         <button
           onClick={dismiss}
           className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+          aria-label="Dismiss checklist"
         >
           <X size={14} />
         </button>
       </div>
 
       {/* Progress bar */}
-      <div className="h-1.5 bg-[var(--bg-elevated)] rounded-full mb-4 overflow-hidden">
+      <div className="h-0.5 w-full bg-[var(--bg-elevated)]">
         <div
-          className="h-full bg-[var(--accent)] rounded-full transition-all duration-500"
+          className="h-full bg-[var(--accent)] opacity-60 transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-[var(--border-subtle)]">
         {checklistItems.map((item) => {
           const done = completed[item.id];
           return (
@@ -157,18 +160,24 @@ function SetupChecklist() {
               key={item.id}
               href={item.href}
               onClick={() => markDone(item.id)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] transition-colors ${
-                done
-                  ? "bg-[var(--accent-muted)] text-[var(--accent)]"
-                  : "bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              className={`flex-1 flex items-center justify-center sm:justify-start gap-3 p-4 transition-colors cursor-pointer group ${
+                done 
+                  ? "bg-[rgba(255,255,255,0.01)] hover:bg-[rgba(255,255,255,0.02)]" 
+                  : "bg-transparent hover:bg-[rgba(255,255,255,0.02)]"
               }`}
             >
-              {done ? (
-                <Check size={12} />
-              ) : (
-                <item.icon size={12} />
-              )}
-              {item.label}
+              <div 
+                className={`flex-shrink-0 w-4 h-4 rounded-[4px] flex items-center justify-center transition-colors border ${
+                  done 
+                    ? "bg-[var(--accent)] border-transparent opacity-50 text-white" 
+                    : "border-current opacity-30 group-hover:opacity-50 text-[var(--text-secondary)] bg-transparent"
+                }`}
+              >
+                {done && <Check size={10} strokeWidth={3} />}
+              </div>
+              <span className={`text-[13px] whitespace-nowrap ${done ? 'text-[var(--text-muted)] line-through' : 'text-[var(--text-secondary)] font-medium'} transition-colors`}>
+                {item.label}
+              </span>
             </Link>
           );
         })}
@@ -184,23 +193,16 @@ export default function DashboardPage() {
   const [events, setEvents] = useState<GitHubEvent[]>([]);
   const [eventsLoading, setEventsLoading] = useState(true);
   const [eventsError, setEventsError] = useState<string | null>(null);
-  const [showBanner, setShowBanner] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
 
   // Check localStorage on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
-    setShowBanner(localStorage.getItem("opti-banner-dismissed") !== "true");
 
     if (localStorage.getItem("opti-onboarded") !== "true") {
       setShowWelcome(true);
     }
   }, []);
-
-  const dismissBanner = () => {
-    localStorage.setItem("opti-banner-dismissed", "true");
-    setShowBanner(false);
-  };
 
   const closeWelcome = () => {
     localStorage.setItem("opti-onboarded", "true");
@@ -257,23 +259,19 @@ export default function DashboardPage() {
       </AnimatePresence>
 
       {/* Announcement banner */}
-      {showBanner && (
-        <div className="mb-6 flex items-center gap-2">
-          <Link href="/dashboard/optibot" className="inline-flex items-center gap-2 text-[14px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-            <span className="text-[11px] font-medium uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[var(--accent)] text-white">
-              New
-            </span>
+      <div className="mb-6 flex items-center">
+        <Link href="/dashboard/optibot" className="flex items-center gap-3 w-fit rounded-full border border-[var(--border-subtle)] bg-[rgba(255,255,255,0.02)] p-1 pr-4 hover:bg-[rgba(255,255,255,0.05)] transition-colors group shadow-sm cursor-pointer">
+          <span className="bg-[#f0f6fc] text-[#0d1117] px-3.5 py-1.5 rounded-full text-[13px] font-medium leading-none">
+            New
+          </span>
+          <span className="text-[14px] text-white font-medium tracking-wide">
             Introducing Optibot v2
-            <ChevronRight size={14} />
-          </Link>
-          <button
-            onClick={dismissBanner}
-            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer ml-1"
-          >
-            <X size={14} />
-          </button>
-        </div>
-      )}
+          </span>
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="text-[#9198a1] group-hover:text-white transition-colors ml-0.5">
+            <path d="M5.5 3L10.5 8L5.5 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+      </div>
 
       {/* Greeting */}
       <div className="mb-8">
@@ -281,7 +279,7 @@ export default function DashboardPage() {
           {session?.user?.name ? `${session.user.name}'s Workspace` : "Your Workspace"}
         </p>
         <h1
-          className="text-[32px] font-normal tracking-[-0.02em] text-[var(--text-primary)]"
+          className="text-[24px] font-normal tracking-[-0.02em] text-[var(--text-secondary)]"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {getGreeting()}, {session?.user?.name?.split(" ")[0] || "there"}
@@ -293,17 +291,28 @@ export default function DashboardPage() {
 
       {/* Feature cards */}
       <div className="mb-10">
+        <h3 className="text-[13px] font-medium uppercase tracking-wider text-[var(--text-muted)] mb-3">Tools</h3>
         <FeatureCards />
       </div>
 
-      {/* Two-column section */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
-        <RecentActivity
-          events={events}
-          loading={eventsLoading}
-          error={eventsError}
-        />
-        <QuickSetup />
+      {/* Two-Column Insights & Activity */}
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        
+        {/* Left Column: Optibot Insights + Recent Activity */}
+        <div className="flex flex-col gap-8">
+          <OptibotInsights />
+          <RecentActivity
+            events={events}
+            loading={eventsLoading}
+            error={eventsError}
+          />
+        </div>
+
+        {/* Right Column: Improvement Graph */}
+        <div className="flex flex-col gap-8 h-full">
+          <ImprovementGraph />
+        </div>
+
       </div>
     </>
   );

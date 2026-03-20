@@ -41,13 +41,13 @@ export function QuickSetup() {
           <Link
             key={action.label}
             href={action.href}
-            className="block w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] rounded-[8px] p-4 text-left transition-colors group border border-[var(--border-subtle)]"
+            className="block w-full dashboard-card hover:bg-[var(--bg-elevated)] p-4 text-left group"
           >
             <div className="flex items-start gap-3">
               <action.icon size={20} style={{ color: action.color }} className="shrink-0 mt-0.5" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">
+                  <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-wider">
                     Step {idx + 1}
                   </span>
                 </div>

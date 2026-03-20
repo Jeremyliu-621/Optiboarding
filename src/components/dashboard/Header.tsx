@@ -174,7 +174,7 @@ export function Header({ onMenuClick, sidebarCollapsed, onToggleSidebarCollapse 
     <>
       {showCommand && <CommandPalette onClose={() => setShowCommand(false)} />}
 
-      <header className="h-14 flex items-center justify-between px-6 border-b border-[var(--border-subtle)]">
+      <header className="h-14 flex items-center justify-between px-6 border-b border-[rgba(255,255,255,0.05)]">
         <div className="flex items-center gap-2">
           <button
             onClick={onMenuClick}
@@ -200,7 +200,7 @@ export function Header({ onMenuClick, sidebarCollapsed, onToggleSidebarCollapse 
           {/* Search trigger */}
           <button
             onClick={() => setShowCommand(true)}
-            className="hidden sm:flex items-center gap-2 h-8 px-3 rounded-[6px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[13px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:border-[var(--text-muted)] transition-colors cursor-pointer"
+            className="hidden sm:flex items-center gap-2 h-8 px-3 rounded-[6px] bg-[var(--bg-deep)] border border-[var(--card-border)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)] text-[13px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:border-[rgba(255,255,255,0.1)] transition-colors cursor-pointer"
           >
             <Search size={13} />
             <span>Search...</span>

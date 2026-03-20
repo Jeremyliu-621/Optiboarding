@@ -86,14 +86,14 @@ export function FeatureCards() {
         <motion.div key={card.label} variants={item}>
           <Link
             href={card.href}
-            className="group flex flex-col rounded-[12px] overflow-hidden bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+            className="group flex flex-col rounded-[10px] overflow-hidden dashboard-card hover:bg-[var(--bg-elevated)] transition-all duration-200 hover:-translate-y-0.5"
           >
             {/* Icon area */}
-            <div className="aspect-[4/3] flex items-center justify-center">
-              <card.icon size={56} strokeWidth={1.25} style={{ color: card.color }} className="transition-transform duration-200 group-hover:scale-110" />
+            <div className="aspect-[3/2] flex items-center justify-center">
+              <card.icon size={40} strokeWidth={1.25} style={{ color: card.color }} className="transition-transform duration-200 group-hover:scale-105" />
             </div>
             {/* Label */}
-            <div className="px-3 py-2.5 border-t border-[var(--border-subtle)]">
+            <div className="px-3 py-2.5 border-t border-[var(--card-border)]">
               <span className="text-[13px] text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
                 {card.label}
               </span>
