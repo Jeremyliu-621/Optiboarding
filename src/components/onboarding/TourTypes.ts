@@ -55,7 +55,7 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     id: 4,
-    route: "/dashboard/configuration",
+    route: "/dashboard/configuration/settings",
     sidebarTarget: "Settings",
     panelTitle: "Fine-tune Optibot",
     panelDescription:
@@ -66,7 +66,7 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     id: 5,
-    route: "/dashboard/configuration?tab=guidelines",
+    route: "/dashboard/configuration/guidelines",
     sidebarTarget: "Guidelines",
     panelTitle: "Teach Optibot your rules",
     panelDescription:
