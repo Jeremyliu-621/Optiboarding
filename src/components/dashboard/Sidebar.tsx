@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { useTour } from "@/components/onboarding/TourContext";
 import {
   LayoutDashboard,
   Bot,
@@ -94,11 +95,16 @@ function NavItem({
   collapsed: boolean;
   external?: boolean;
 }) {
+  const { currentTourStep, isActive: isTourActive } = useTour();
+  const isTourTarget = isTourActive && currentTourStep?.sidebarTarget === label;
+
   const cls = `
     flex items-center rounded-[6px] py-[7px] transition-colors text-[13px] relative
     ${collapsed ? "justify-center px-0" : "gap-2.5 px-3"}
     ${
-      active
+      isTourTarget
+        ? "text-[var(--text-primary)] bg-[var(--bg-elevated)]"
+        : active
         ? "text-[var(--text-primary)] bg-[var(--bg-elevated)]"
         : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
     }
@@ -120,8 +126,12 @@ function NavItem({
 
   return (
     <Link href={href} title={collapsed ? label : undefined} className={cls}>
-      {active && (
-        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-r-full bg-[var(--accent)]" />
+      {(active || isTourTarget) && (
+        <span
+          className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-r-full bg-[var(--accent)] ${
+            isTourTarget ? "pulse-active" : ""
+          }`}
+        />
       )}
       <Icon size={17} className="shrink-0" />
       {!collapsed && <span className="whitespace-nowrap truncate">{label}</span>}

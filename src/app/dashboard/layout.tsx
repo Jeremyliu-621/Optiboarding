@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Header } from "@/components/dashboard/Header";
-import { OnboardingWizard } from "@/components/dashboard/OnboardingWizard";
+import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider";
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true);
@@ -29,14 +29,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const isDesktop = useIsDesktop();
-
-  useEffect(() => {
-    if (status === "authenticated" && !localStorage.getItem("optimal-onboarded")) {
-      setShowOnboarding(true);
-    }
-  }, [status]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -55,52 +48,41 @@ export default function DashboardLayout({
   const mainMargin = isDesktop ? (sidebarCollapsed ? "56px" : "220px") : "0px";
 
   return (
-    <div className="min-h-screen bg-[var(--bg-deep)]">
-      <Sidebar
-        open={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        collapsed={sidebarCollapsed}
-        onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
-      />
-
-      <div
-        className="transition-[margin] duration-200 ease-in-out"
-        style={{ marginLeft: mainMargin }}
-      >
-        <Header
-          onMenuClick={() => setSidebarOpen(true)}
-          sidebarCollapsed={sidebarCollapsed}
-          onToggleSidebarCollapse={() => setSidebarCollapsed((c) => !c)}
+    <OnboardingProvider>
+      <div className="min-h-screen bg-[var(--bg-deep)]">
+        <Sidebar
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          collapsed={sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
         />
 
-        <main className="px-4 sm:px-6 lg:px-8 py-6 max-w-[1100px] mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
-        </main>
-      </div>
-
-      <AnimatePresence>
-        {showOnboarding && (
-          <OnboardingWizard
-            userName={session.user?.name || undefined}
-            userImage={session.user?.image || undefined}
-            onComplete={() => {
-              localStorage.setItem("optimal-onboarded", "true");
-              setShowOnboarding(false);
-            }}
+        <div
+          className="transition-[margin] duration-200 ease-in-out"
+          style={{ marginLeft: mainMargin }}
+        >
+          <Header
+            onMenuClick={() => setSidebarOpen(true)}
+            sidebarCollapsed={sidebarCollapsed}
+            onToggleSidebarCollapse={() => setSidebarCollapsed((c) => !c)}
           />
-        )}
-      </AnimatePresence>
-    </div>
+
+          <main className="px-4 sm:px-6 lg:px-8 py-6 max-w-[1100px] mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={pathname}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </div>
+      </div>
+    </OnboardingProvider>
   );
 }
 
