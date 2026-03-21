@@ -3,8 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, X, Sparkles, Check, GitFork, Settings, Users as UsersIcon } from "lucide-react";
+import { ChevronRight, X, Check, GitFork, Settings, Users as UsersIcon } from "lucide-react";
 import { FeatureCards } from "@/components/dashboard/FeatureCards";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { OptibotInsights } from "@/components/dashboard/OptibotInsights";
@@ -18,74 +17,6 @@ function getGreeting() {
   if (hour < 12) return "Good morning";
   if (hour < 18) return "Good afternoon";
   return "Good evening";
-}
-
-/* ─── Onboarding welcome modal ─── */
-function WelcomeModal({
-  name,
-  avatar,
-  onClose,
-}: {
-  name: string;
-  avatar?: string | null;
-  onClose: () => void;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm"
-    >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 10 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] as const }}
-        className="w-full max-w-[440px] mx-4 bg-[var(--bg-surface)] rounded-[16px] p-8 text-center relative"
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-        >
-          <X size={18} />
-        </button>
-
-        {/* Avatar */}
-        {avatar && (
-          <div className="mb-5 flex justify-center">
-            <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--bg-surface)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={avatar} alt={name} className="w-full h-full object-cover" />
-            </div>
-          </div>
-        )}
-
-        <h2
-          className="text-[24px] text-[var(--text-primary)] mb-2"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          Welcome to Optimal AI
-        </h2>
-        <p className="text-[14px] text-[var(--text-secondary)] mb-1">
-          {name ? `Hey ${name.split(" ")[0]},` : "Hey there,"} you&apos;re all set.
-        </p>
-        <p className="text-[13px] text-[var(--text-muted)] mb-6 max-w-[320px] mx-auto">
-          Optibot reviews every pull request with full codebase context — catching breaking
-          changes, security issues, and cross-repo impacts before they hit production.
-        </p>
-
-        <button
-          onClick={onClose}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[8px] bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-[14px] font-medium transition-colors cursor-pointer"
-        >
-          <Sparkles size={16} />
-          <span>Let&apos;s get started</span>
-        </button>
-      </motion.div>
-    </motion.div>
-  );
 }
 
 /* ─── Setup checklist ─── */
@@ -192,22 +123,6 @@ export default function DashboardPage() {
   const [events, setEvents] = useState<GitHubEvent[]>([]);
   const [eventsLoading, setEventsLoading] = useState(true);
   const [eventsError, setEventsError] = useState<string | null>(null);
-  const [showWelcome, setShowWelcome] = useState(false);
-
-  // Check localStorage on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    if (localStorage.getItem("opti-onboarded") !== "true") {
-      setShowWelcome(true);
-    }
-  }, []);
-
-  const closeWelcome = () => {
-    localStorage.setItem("opti-onboarded", "true");
-    setShowWelcome(false);
-  };
-
   const fetchData = useCallback(async () => {
     if (!session?.accessToken) return;
 
@@ -246,17 +161,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      {/* Welcome modal */}
-      <AnimatePresence>
-        {showWelcome && (
-          <WelcomeModal
-            name={session?.user?.name || ""}
-            avatar={session?.user?.image}
-            onClose={closeWelcome}
-          />
-        )}
-      </AnimatePresence>
-
       {/* Announcement banner */}
       <div className="mb-6 flex items-center">
         <Link href="/dashboard/optibot" className="flex items-center gap-3 w-fit rounded-full border border-[var(--border-subtle)] bg-[rgba(255,255,255,0.02)] p-1 pr-4 hover:bg-[rgba(255,255,255,0.05)] transition-colors group shadow-sm cursor-pointer">
