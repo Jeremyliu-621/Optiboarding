@@ -58,6 +58,29 @@ h6 {
   color: var(--text-primary);
 }
 
+/* Global scrollbar — thin, muted */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: hsla(275, 10%, 35%, 0.35) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(275, 10%, 35%, 0.35);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(275, 10%, 45%, 0.5);
+}
+
 /* Onboarding modal scrollbar — thin, rounded, light grey */
 .onboarding-scroll {
   scrollbar-width: thin;
