@@ -59,7 +59,7 @@ export const TOUR_STEPS: TourStep[] = [
     sidebarTarget: "Settings",
     panelTitle: "Fine-tune Optibot",
     panelDescription:
-      "Settings is where you control how Optibot behaves across your workspace. The review settings you configured during onboarding live here — you can change them any time. You'll also find your API key and webhook configuration.",
+      "Settings is where you fine-tune every aspect of Optibot. Configure how Optibot reviews and summarizes PRs, Optibot's sensitivity levels, and more. Per repository.",
 
     nextLabel: "See Guidelines →",
     backLabel: "← Back",
