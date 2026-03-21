@@ -6,7 +6,31 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Header } from "@/components/dashboard/Header";
-import { OnboardingWizard } from "@/components/dashboard/OnboardingWizard";
+import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider";
+import { useTour } from "@/components/onboarding/TourContext";
+
+function AuroraBloom() {
+  const { isActive: tourActive } = useTour();
+  if (!tourActive) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="fixed inset-0 pointer-events-none"
+      style={{
+        zIndex: 10,
+        background: [
+          "radial-gradient(ellipse 90% 70% at 92% 115%, hsla(310, 55%, 45%, 0.75), transparent 70%)",
+          "radial-gradient(ellipse 80% 65% at 98% 100%, hsla(270, 50%, 40%, 0.65), transparent 65%)",
+          "radial-gradient(ellipse 70% 55% at 85% 95%, hsla(290, 40%, 38%, 0.5), transparent 60%)",
+        ].join(", "),
+      }}
+    />
+  );
+}
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true);
@@ -29,14 +53,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const isDesktop = useIsDesktop();
-
-  useEffect(() => {
-    if (status === "authenticated" && !localStorage.getItem("optimal-onboarded")) {
-      setShowOnboarding(true);
-    }
-  }, [status]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -55,52 +72,47 @@ export default function DashboardLayout({
   const mainMargin = isDesktop ? (sidebarCollapsed ? "56px" : "220px") : "0px";
 
   return (
-    <div className="min-h-screen bg-[var(--bg-deep)]">
-      <Sidebar
-        open={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        collapsed={sidebarCollapsed}
-        onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
-      />
+    <OnboardingProvider>
+      <div className="h-screen overflow-hidden bg-[var(--bg-deep)]">
+        <AnimatePresence>
+          <AuroraBloom />
+        </AnimatePresence>
 
-      <div
-        className="transition-[margin] duration-200 ease-in-out"
-        style={{ marginLeft: mainMargin }}
-      >
-        <Header
-          onMenuClick={() => setSidebarOpen(true)}
-          sidebarCollapsed={sidebarCollapsed}
-          onToggleSidebarCollapse={() => setSidebarCollapsed((c) => !c)}
+        <Sidebar
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          collapsed={sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
         />
 
-        <main className="px-4 sm:px-6 lg:px-8 py-6 max-w-[1100px] mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
-        </main>
-      </div>
-
-      <AnimatePresence>
-        {showOnboarding && (
-          <OnboardingWizard
-            userName={session.user?.name || undefined}
-            userImage={session.user?.image || undefined}
-            onComplete={() => {
-              localStorage.setItem("optimal-onboarded", "true");
-              setShowOnboarding(false);
-            }}
+        <div
+          className="flex flex-col h-full transition-[margin] duration-200 ease-in-out"
+          style={{ marginLeft: mainMargin }}
+        >
+          <Header
+            onMenuClick={() => setSidebarOpen(true)}
+            sidebarCollapsed={sidebarCollapsed}
+            onToggleSidebarCollapse={() => setSidebarCollapsed((c) => !c)}
           />
-        )}
-      </AnimatePresence>
-    </div>
+
+          <main className="flex-1 overflow-y-auto dashboard-scroll">
+            <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-[1100px] mx-auto">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={pathname}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  {children}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </main>
+        </div>
+      </div>
+    </OnboardingProvider>
   );
 }
 
