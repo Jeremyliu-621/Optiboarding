@@ -23,7 +23,7 @@ export function TourPanel({ step, stepNumber, totalSteps }: TourPanelProps) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 16 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="fixed bottom-8 right-8 z-40 w-[360px]"
+        className="fixed bottom-8 right-8 z-[56] w-[360px]"
         style={{
           background: "radial-gradient(ellipse at top left, hsl(275, 20%, 18%) 0%, hsl(275, 15%, 11%) 70%)",
           border: "1px solid hsl(275, 20%, 25%)",

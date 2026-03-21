@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { TourContext } from "./TourContext";
 import { TOUR_STEPS } from "./TourTypes";
 import { TourPanel } from "./TourPanel";
@@ -107,11 +108,29 @@ export function TourProvider({
   return (
     <TourContext.Provider value={contextValue}>
       {children}
-      {isActive && currentTourStep && (
-        <>
-          <TourPanel step={currentTourStep} stepNumber={currentStep} totalSteps={TOUR_STEPS.length} />
-        </>
-      )}
+      <AnimatePresence>
+        {isActive && currentTourStep && (
+          <>
+            {/* Soft gradient wash — bottom half only, flows around tour panel */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="fixed inset-0 z-[55] pointer-events-none"
+              style={{
+                background: [
+                  "radial-gradient(ellipse 80% 50% at 70% 100%, hsla(275, 60%, 55%, 0.28), transparent 60%)",
+                  "radial-gradient(ellipse 60% 45% at 30% 95%, hsla(310, 50%, 55%, 0.18), transparent 55%)",
+                  "radial-gradient(ellipse 50% 40% at 90% 85%, hsla(255, 55%, 58%, 0.15), transparent 50%)",
+                ].join(", "),
+              }}
+            />
+
+            <TourPanel step={currentTourStep} stepNumber={currentStep} totalSteps={TOUR_STEPS.length} />
+          </>
+        )}
+      </AnimatePresence>
     </TourContext.Provider>
   );
 }
