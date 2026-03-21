@@ -45,77 +45,80 @@ export function Step2Settings({
     <div className="w-full max-w-[540px] mx-auto space-y-6">
       {/* Headline */}
       <div>
-        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-[#0a0a0a] mb-2">
+        <h1
+          className="text-[28px] font-bold tracking-[-0.02em] mb-2"
+          style={{ color: "hsl(275, 8%, 88%)" }}
+        >
           How should Optibot review your code?
         </h1>
-        <p className="text-[14px] text-[#8a8a8a]">
+        <p className="text-[14px]" style={{ color: "hsl(275, 6%, 58%)" }}>
           You can fine-tune these in Settings at any time.
         </p>
       </div>
 
       {/* Group 1: Trigger Behaviour */}
-      <div className="rounded-[10px] overflow-hidden" style={{ backgroundColor: "#f7f7f7" }}>
-        <p className="text-[11px] font-semibold uppercase text-[#8a8a8a] px-5 pt-4 pb-3" style={{ letterSpacing: "0.08em" }}>
+      <div
+        className="rounded-[10px] overflow-hidden"
+        style={{ background: "hsl(275, 10%, 16%)", border: "1px solid hsl(275, 10%, 22%)" }}
+      >
+        <p
+          className="text-[11px] font-semibold uppercase px-5 pt-4 pb-3"
+          style={{ letterSpacing: "0.08em", color: "hsl(275, 5%, 42%)" }}
+        >
           Trigger Behaviour
         </p>
-        <div className="divide-y divide-[#ebebeb]">
-          <div className="px-5 py-0.5">
-            <ToggleLight
-              label="Auto review"
-              description="Automatically review every PR when it's opened."
-              checked={settings.autoReview}
-              onChange={(val) => handleSettingChange("autoReview", val)}
-            />
-          </div>
-          <div className="px-5 py-0.5">
-            <ToggleLight
-              label="Auto review on draft"
-              description="Include draft PRs in automatic reviews."
-              checked={settings.autoReviewOnDraft}
-              onChange={(val) => handleSettingChange("autoReviewOnDraft", val)}
-            />
-          </div>
-          <div className="px-5 py-0.5">
-            <ToggleLight
-              label="Auto review on push"
-              description="Trigger a new review whenever commits are pushed to an open PR."
-              checked={settings.autoReviewOnPush}
-              onChange={(val) => handleSettingChange("autoReviewOnPush", val)}
-            />
-          </div>
-          <div className="px-5 py-0.5">
-            <ToggleLight
-              label="Auto review after workflow"
-              description="Only trigger a review after CI passes."
-              checked={settings.autoReviewAfterWorkflow}
-              onChange={(val) => handleSettingChange("autoReviewAfterWorkflow", val)}
-            />
-          </div>
+        <div style={{ borderTop: "1px solid hsl(275, 8%, 20%)" }}>
+          {[
+            { key: "autoReview" as const, label: "Auto review", description: "Automatically review every PR when it's opened." },
+            { key: "autoReviewOnDraft" as const, label: "Auto review on draft", description: "Include draft PRs in automatic reviews." },
+            { key: "autoReviewOnPush" as const, label: "Auto review on push", description: "Trigger a new review whenever commits are pushed to an open PR." },
+            { key: "autoReviewAfterWorkflow" as const, label: "Auto review after workflow", description: "Only trigger a review after CI passes." },
+          ].map((item, i) => (
+            <div
+              key={item.key}
+              className="px-5 py-0.5"
+              style={i > 0 ? { borderTop: "1px solid hsl(275, 8%, 20%)" } : undefined}
+            >
+              <ToggleLight
+                label={item.label}
+                description={item.description}
+                checked={settings[item.key]}
+                onChange={(val) => handleSettingChange(item.key, val)}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Group 2: Review Style */}
-      <div className="rounded-[10px] overflow-hidden" style={{ backgroundColor: "#f7f7f7" }}>
-        <p className="text-[11px] font-semibold uppercase text-[#8a8a8a] px-5 pt-4 pb-3" style={{ letterSpacing: "0.08em" }}>
+      <div
+        className="rounded-[10px] overflow-hidden"
+        style={{ background: "hsl(275, 10%, 16%)", border: "1px solid hsl(275, 10%, 22%)" }}
+      >
+        <p
+          className="text-[11px] font-semibold uppercase px-5 pt-4 pb-3"
+          style={{ letterSpacing: "0.08em", color: "hsl(275, 5%, 42%)" }}
+        >
           Review Style
         </p>
-        <div className="divide-y divide-[#ebebeb]">
-          <div className="px-5 py-0.5">
-            <ToggleLight
-              label="Allow approve"
-              description="Optibot can approve PRs that pass all checks without human sign-off."
-              checked={settings.allowApprove}
-              onChange={(val) => handleSettingChange("allowApprove", val)}
-            />
-          </div>
-          <div className="px-5 py-0.5">
-            <ToggleLight
-              label="Code suggestions"
-              description="Generate inline code suggestions alongside review comments."
-              checked={settings.codeSuggestions}
-              onChange={(val) => handleSettingChange("codeSuggestions", val)}
-            />
-          </div>
+        <div style={{ borderTop: "1px solid hsl(275, 8%, 20%)" }}>
+          {[
+            { key: "allowApprove" as const, label: "Allow approve", description: "Optibot can approve PRs that pass all checks without human sign-off." },
+            { key: "codeSuggestions" as const, label: "Code suggestions", description: "Generate inline code suggestions alongside review comments." },
+          ].map((item, i) => (
+            <div
+              key={item.key}
+              className="px-5 py-0.5"
+              style={i > 0 ? { borderTop: "1px solid hsl(275, 8%, 20%)" } : undefined}
+            >
+              <ToggleLight
+                label={item.label}
+                description={item.description}
+                checked={settings[item.key]}
+                onChange={(val) => handleSettingChange(item.key, val)}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

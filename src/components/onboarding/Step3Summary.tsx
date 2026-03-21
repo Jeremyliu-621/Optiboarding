@@ -38,10 +38,10 @@ export function Step3Summary() {
         {/* Left Column: Text Content */}
         <div className="space-y-6">
           <div>
-            <h1 className="text-[28px] font-bold tracking-[-0.02em] text-[#0a0a0a] mb-1.5">
+            <h1 className="text-[28px] font-bold tracking-[-0.02em] mb-1.5" style={{ color: "hsl(275, 8%, 88%)" }}>
               You&#39;re all set.
             </h1>
-            <p className="text-[15px] text-[#8a8a8a] leading-relaxed">
+            <p className="text-[15px] leading-relaxed" style={{ color: "hsl(275, 6%, 58%)" }}>
               Start reviewing code with full codebase context.
             </p>
           </div>
@@ -56,16 +56,16 @@ export function Step3Summary() {
                     {step.number}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className="w-px bg-[#d4c0f0] flex-1 my-1" />
+                    <div className="w-px flex-1 my-1" style={{ background: "hsl(275, 20%, 28%)" }} />
                   )}
                 </div>
 
                 {/* Step Content */}
                 <div className="pt-0.5 pb-5">
-                  <p className="text-[14px] font-semibold text-[#0a0a0a]">
+                  <p className="text-[14px] font-semibold" style={{ color: "hsl(275, 8%, 88%)" }}>
                     {step.title}
                   </p>
-                  <p className="text-[13px] text-[#8a8a8a] mt-0.5 leading-relaxed">
+                  <p className="text-[13px] mt-0.5 leading-relaxed" style={{ color: "hsl(275, 6%, 58%)" }}>
                     {step.description}
                   </p>
                 </div>

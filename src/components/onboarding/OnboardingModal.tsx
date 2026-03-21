@@ -53,13 +53,14 @@ export function OnboardingModal({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed z-[60] bg-white rounded-[12px] flex flex-col"
+            className="fixed z-[60] rounded-[12px] flex flex-col"
             style={{
               top: "44px",
               left: "44px",
               right: "44px",
               bottom: "44px",
-              boxShadow: "0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.08)",
+              background: "hsl(275, 12%, 11%)",
+              boxShadow: "0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px hsl(275, 15%, 20%)",
             }}
           >
             {/* Top bar: Logo + Progress */}
@@ -73,16 +74,16 @@ export function OnboardingModal({
                   className="rounded"
                 />
                 <span
-                  className="text-[16px] font-normal tracking-[-0.02em] text-[#0a0a0a]"
-                  style={{ fontFamily: "var(--font-heading)" }}
+                  className="text-[16px] font-normal tracking-[-0.02em]"
+                  style={{ fontFamily: "var(--font-heading)", color: "hsl(275, 8%, 82%)" }}
                 >
                   Optimal AI
                 </span>
               </div>
 
               <div
-                className="h-0.5 rounded-full bg-[#e0e0e0] overflow-hidden"
-                style={{ width: "160px" }}
+                className="overflow-hidden rounded-full h-0.5"
+                style={{ width: "160px", background: "hsl(275, 10%, 20%)" }}
               >
                 <motion.div
                   className="h-full bg-[#5b3dc8]"
@@ -111,14 +112,15 @@ export function OnboardingModal({
 
             {/* Bottom bar */}
             <div
-              className="border-t border-[#e0e0e0] flex items-center justify-between shrink-0"
-              style={{ padding: "20px 36px" }}
+              className="flex items-center justify-between shrink-0"
+              style={{ padding: "20px 36px", borderTop: "1px solid hsl(275, 10%, 20%)" }}
             >
               <div>
                 {backVisible && (
                   <button
                     onClick={onBack}
-                    className="text-[13px] text-[#8a8a8a] hover:text-[#4a4a4a] transition-colors cursor-pointer"
+                    className="text-[13px] transition-colors cursor-pointer"
+                    style={{ color: "hsl(275, 6%, 55%)" }}
                   >
                     ← Back
                   </button>
@@ -129,7 +131,8 @@ export function OnboardingModal({
                 {skipVisible && (
                   <button
                     onClick={onSkip}
-                    className="text-[13px] text-[#8a8a8a] hover:text-[#4a4a4a] transition-colors cursor-pointer"
+                    className="text-[13px] transition-colors cursor-pointer"
+                    style={{ color: "hsl(275, 6%, 55%)" }}
                   >
                     Skip for now
                   </button>
