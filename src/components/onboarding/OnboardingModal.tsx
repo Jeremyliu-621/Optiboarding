@@ -94,19 +94,23 @@ export function OnboardingModal({
               </div>
             </div>
 
-            {/* Content area — vertically centered, generous horizontal padding */}
-            <div className="flex-1 overflow-y-auto flex items-center justify-center" style={{ padding: "32px 0" }}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentStep}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {children}
-                </motion.div>
-              </AnimatePresence>
+            {/* Content area — scrollable, content centered via inner wrapper */}
+            <div className="flex-1 overflow-y-auto onboarding-scroll">
+              {/* Inner wrapper: min-height 100% so content is centered when it fits,
+                  but starts from top (with padding) when content overflows */}
+              <div className="min-h-full flex items-center justify-center py-10">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentStep}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {children}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Bottom bar */}
