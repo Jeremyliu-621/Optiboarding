@@ -22,6 +22,16 @@ export function Step3Summary() {
     },
   ];
 
+  // The 6 feature cards from the actual dashboard, with their accent colors
+  const featureCards = [
+    { label: "Review a PR",      accent: "hsl(275, 55%, 65%)" },
+    { label: "View Insights",    accent: "hsl(220, 65%, 60%)" },
+    { label: "Security Scan",    accent: "hsl(38, 70%, 55%)"  },
+    { label: "Browse Repos",     accent: "hsl(175, 55%, 50%)" },
+    { label: "Team Activity",    accent: "hsl(10, 65%, 58%)"  },
+    { label: "Release Notes",    accent: "hsl(290, 50%, 58%)" },
+  ];
+
   return (
     <div className="w-full max-w-[820px] mx-auto">
       <div className="grid grid-cols-[1fr_1fr] gap-16 items-center">
@@ -36,7 +46,7 @@ export function Step3Summary() {
             </p>
           </div>
 
-          {/* Numbered Steps List — compact spacing like Stripe */}
+          {/* Numbered Steps List */}
           <div className="relative">
             {steps.map((step, index) => (
               <div key={step.number} className="flex gap-3.5">
@@ -64,85 +74,143 @@ export function Step3Summary() {
           </div>
         </div>
 
-        {/* Right Column: Dashboard Preview Mockup */}
+        {/* Right Column: Dashboard Preview Mockup — no tilt */}
         <div className="relative flex items-center justify-center">
-          {/* Subtle radial gradient halo behind panel */}
+          {/* Subtle purple halo behind the panel */}
           <div
-            className="absolute inset-0 opacity-30 pointer-events-none"
+            className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 400px 400px at center, rgba(91, 61, 200, 0.15), transparent 70%)",
+                "radial-gradient(ellipse 80% 80% at center, hsla(275, 35%, 55%, 0.12), transparent 70%)",
             }}
           />
 
-          {/* Dashboard mockup panel with 3D tilt */}
+          {/* Dashboard mockup panel */}
           <div
-            className="w-full rounded-[12px] overflow-hidden relative"
+            className="w-full rounded-[10px] overflow-hidden relative"
             style={{
-              aspectRatio: "4/3",
               backgroundColor: "hsl(275, 15%, 7%)",
-              boxShadow:
-                "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1)",
-              transform: "perspective(800px) rotateX(2deg) rotateY(-4deg)",
-              backfaceVisibility: "hidden",
+              border: "1px solid hsl(275, 10%, 15%)",
+              boxShadow: "0 16px 48px rgba(0, 0, 0, 0.25)",
             }}
           >
-            {/* Mock Sidebar */}
+            {/* Header bar */}
             <div
-              className="absolute top-0 left-0 w-10 h-full border-r"
-              style={{ borderColor: "hsl(275, 10%, 15%)" }}
+              className="flex items-center justify-between px-3 py-2.5 border-b"
+              style={{
+                backgroundColor: "hsl(275, 14%, 8%)",
+                borderColor: "hsl(275, 10%, 14%)",
+              }}
             >
-              <div className="p-2.5 space-y-3 pt-3">
+              <div className="flex items-center gap-1.5">
+                {/* Logo dot */}
+                <div
+                  className="w-3.5 h-3.5 rounded-sm"
+                  style={{ backgroundColor: "hsl(275, 35%, 40%)" }}
+                />
+                <span className="text-[9px] font-medium text-white opacity-70">
+                  Optimal AI
+                </span>
+              </div>
+              {/* Fake search bar */}
+              <div
+                className="h-4 w-20 rounded-[4px]"
+                style={{ backgroundColor: "hsl(275, 10%, 14%)" }}
+              />
+            </div>
+
+            <div className="flex" style={{ minHeight: "200px" }}>
+              {/* Sidebar */}
+              <div
+                className="w-9 shrink-0 border-r pt-3 px-2 space-y-2.5"
+                style={{
+                  backgroundColor: "hsl(275, 14%, 8%)",
+                  borderColor: "hsl(275, 10%, 14%)",
+                }}
+              >
                 {[...Array(5)].map((_, i) => (
                   <div
                     key={i}
-                    className="w-4 h-4 rounded-full"
-                    style={{ backgroundColor: "hsl(275, 15%, 25%)" }}
+                    className="w-4 h-4 rounded-[3px]"
+                    style={{ backgroundColor: "hsl(275, 12%, 22%)" }}
                   />
                 ))}
               </div>
-            </div>
 
-            {/* Mock Content Area */}
-            <div className="ml-10 p-3 space-y-3">
-              {/* Mock Header */}
-              <div className="flex items-center justify-between">
-                <div
-                  className="h-4 w-24 rounded"
-                  style={{ backgroundColor: "hsl(275, 10%, 15%)" }}
-                />
-                <div
-                  className="h-4 w-16 rounded"
-                  style={{ backgroundColor: "hsl(275, 10%, 15%)" }}
-                />
-              </div>
-
-              {/* Mock Feature Cards Grid */}
-              <div className="grid grid-cols-3 gap-1.5">
-                {[...Array(6)].map((_, i) => (
+              {/* Main content */}
+              <div className="flex-1 p-3 space-y-2.5">
+                {/* Greeting row */}
+                <div className="space-y-1 mb-3">
                   <div
-                    key={i}
-                    className="h-12 rounded-[6px]"
-                    style={{ backgroundColor: "hsl(275, 10%, 15%)" }}
+                    className="h-2 w-16 rounded-full"
+                    style={{ backgroundColor: "hsl(275, 10%, 18%)" }}
                   />
-                ))}
-              </div>
-
-              {/* Mock Stat Row */}
-              <div className="flex gap-2">
-                {[...Array(3)].map((_, i) => (
                   <div
-                    key={i}
-                    className="h-8 flex-1 rounded"
-                    style={{ backgroundColor: "hsl(275, 10%, 15%)" }}
+                    className="h-3.5 w-28 rounded-full"
+                    style={{ backgroundColor: "hsl(275, 10%, 22%)" }}
                   />
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* Small Optimal AI Logo */}
-            <div className="absolute top-2.5 left-12 text-white text-[9px] font-medium opacity-60">
-              Optimal AI
+                {/* 2×3 feature cards grid — matches actual dashboard layout */}
+                <div className="grid grid-cols-3 gap-1.5">
+                  {featureCards.map((card) => (
+                    <div
+                      key={card.label}
+                      className="rounded-[6px] p-1.5 flex flex-col gap-1.5"
+                      style={{ backgroundColor: "hsl(275, 12%, 12%)" }}
+                    >
+                      {/* Colored icon square */}
+                      <div
+                        className="w-5 h-5 rounded-[4px]"
+                        style={{
+                          backgroundColor: card.accent
+                            .replace("hsl(", "hsla(")
+                            .replace(")", ", 0.18)"),
+                        }}
+                      >
+                        <div
+                          className="w-2.5 h-2.5 rounded-full m-auto mt-[5px]"
+                          style={{
+                            backgroundColor: card.accent
+                              .replace("hsl(", "hsla(")
+                              .replace(")", ", 0.7)"),
+                          }}
+                        />
+                      </div>
+                      {/* Label bar */}
+                      <div
+                        className="h-1.5 w-10 rounded-full"
+                        style={{ backgroundColor: "hsl(275, 10%, 22%)" }}
+                      />
+                      {/* Description bar */}
+                      <div
+                        className="h-1 w-8 rounded-full"
+                        style={{ backgroundColor: "hsl(275, 10%, 18%)" }}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Activity row below cards */}
+                <div className="space-y-1.5 pt-1">
+                  {[...Array(2)].map((_, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div
+                        className="w-3 h-3 rounded-full shrink-0"
+                        style={{ backgroundColor: "hsl(275, 12%, 20%)" }}
+                      />
+                      <div
+                        className="h-1.5 rounded-full flex-1"
+                        style={{ backgroundColor: "hsl(275, 10%, 16%)" }}
+                      />
+                      <div
+                        className="h-1.5 w-8 rounded-full"
+                        style={{ backgroundColor: "hsl(275, 10%, 14%)" }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
