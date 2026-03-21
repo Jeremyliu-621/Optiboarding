@@ -55,7 +55,7 @@ export function Step2Settings({
 
       {/* Group 1: Trigger Behaviour */}
       <div className="rounded-[10px] overflow-hidden" style={{ backgroundColor: "#f7f7f7" }}>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-[#8a8a8a] px-5 pt-4 pb-3">
+        <p className="text-[11px] font-semibold uppercase text-[#8a8a8a] px-5 pt-4 pb-3" style={{ letterSpacing: "0.08em" }}>
           Trigger Behaviour
         </p>
         <div className="divide-y divide-[#ebebeb]">
@@ -96,7 +96,7 @@ export function Step2Settings({
 
       {/* Group 2: Review Style */}
       <div className="rounded-[10px] overflow-hidden" style={{ backgroundColor: "#f7f7f7" }}>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-[#8a8a8a] px-5 pt-4 pb-3">
+        <p className="text-[11px] font-semibold uppercase text-[#8a8a8a] px-5 pt-4 pb-3" style={{ letterSpacing: "0.08em" }}>
           Review Style
         </p>
         <div className="divide-y divide-[#ebebeb]">

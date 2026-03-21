@@ -38,10 +38,11 @@ export function PageOverlay({
           animate={{ translateY: 0 }}
           exit={{ translateY: "100%" }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="fixed left-[220px] right-0 bottom-0 z-30 h-1/2 flex items-stretch"
+          className="fixed right-0 bottom-0 z-30 h-1/2 flex items-stretch"
           style={{
+            left: "220px",
             background:
-              "linear-gradient(to bottom, transparent 0%, hsl(275, 15%, 7%) 80px, hsl(275, 15%, 7%) 100%)",
+              "linear-gradient(to bottom, transparent 0%, hsl(275, 15%, 7%) 120px, hsl(275, 15%, 7%) 100%)",
           }}
         >
           {/* Content container with padding */}

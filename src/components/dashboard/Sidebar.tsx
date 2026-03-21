@@ -129,7 +129,7 @@ function NavItem({
       {(active || isTourTarget) && (
         <span
           className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-r-full bg-[var(--accent)] ${
-            isTourTarget ? "pulse-active" : ""
+            isTourTarget ? "tour-highlight-pulse" : ""
           }`}
         />
       )}
