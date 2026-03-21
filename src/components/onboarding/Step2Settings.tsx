@@ -42,7 +42,7 @@ export function Step2Settings({
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full max-w-[540px] mx-auto space-y-6">
       {/* Headline */}
       <div>
         <h1 className="text-[28px] font-bold tracking-[-0.02em] text-[#0a0a0a] mb-2">

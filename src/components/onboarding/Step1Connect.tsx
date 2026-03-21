@@ -26,7 +26,6 @@ export function Step1Connect({ githubUsername, onIntegrationsChange }: Step1Conn
 
   const handleConnect = async (service: keyof IntegrationState) => {
     setLoadingIntegration(service);
-    // Simulate connection delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIntegrations((prev) => {
       const updated = { ...prev, [service]: true };
@@ -37,32 +36,20 @@ export function Step1Connect({ githubUsername, onIntegrationsChange }: Step1Conn
   };
 
   const integrationServices = [
-    {
-      id: "gitlab" as const,
-      name: "GitLab",
-      icon: GitlabIcon,
-    },
-    {
-      id: "slack" as const,
-      name: "Slack",
-      icon: MessageCircle,
-    },
-    {
-      id: "jira" as const,
-      name: "Jira",
-      icon: Bug,
-    },
+    { id: "gitlab" as const, name: "GitLab", icon: GitlabIcon },
+    { id: "slack" as const, name: "Slack", icon: MessageCircle },
+    { id: "jira" as const, name: "Jira", icon: Bug },
   ];
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full max-w-[520px] mx-auto space-y-7">
       {/* Welcome headline */}
       <div>
         <h1 className="text-[28px] font-bold tracking-[-0.02em] text-[#0a0a0a] mb-2">
           <span className="text-[#5b3dc8]">Welcome to Optimal AI.</span>
         </h1>
-        <p className="text-[15px] text-[#4a4a4a]">
-          Let's connect your tools so Optibot has everything it needs to review your code.
+        <p className="text-[15px] text-[#4a4a4a] leading-relaxed">
+          Let&#39;s connect your tools so Optibot has everything it needs to review your code.
         </p>
       </div>
 

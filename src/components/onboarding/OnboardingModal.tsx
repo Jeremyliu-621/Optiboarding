@@ -94,8 +94,8 @@ export function OnboardingModal({
               </div>
             </div>
 
-            {/* Content area */}
-            <div className="flex-1 overflow-y-auto" style={{ padding: "48px 80px 32px" }}>
+            {/* Content area — vertically centered, generous horizontal padding */}
+            <div className="flex-1 overflow-y-auto flex items-center justify-center" style={{ padding: "32px 0" }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentStep}
