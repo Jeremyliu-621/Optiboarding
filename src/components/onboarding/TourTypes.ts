@@ -81,7 +81,7 @@ export const TOUR_STEPS: TourStep[] = [
     sidebarTarget: "Codebase Map",
     panelTitle: "See your whole codebase",
     panelDescription:
-      "The Codebase Map shows your repository as an interactive treemap. Each rectangle is a file — sized by lines of code, coloured by Optibot's review coverage or issue density. Click any directory to zoom in.",
+      "Create a visual representation of your organization's repository connections. Click on nodes to edit repository info, and click edge labels to describe relationships.",
 
     nextLabel: "Finish tour",
     backLabel: "← Back",
