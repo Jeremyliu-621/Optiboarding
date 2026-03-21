@@ -242,6 +242,7 @@ export function OnboardingProvider({ children }: OnboardingProviderProps) {
 
   return (
     <TourProvider active={tourActive}>
+      {children}
       {showModal && (
         <OnboardingModal
           isOpen={true}
@@ -260,7 +261,6 @@ export function OnboardingProvider({ children }: OnboardingProviderProps) {
           {getStepContent()}
         </OnboardingModal>
       )}
-      {children}
     </TourProvider>
   );
 }
