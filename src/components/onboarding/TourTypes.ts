@@ -4,7 +4,6 @@ export interface TourStep {
   sidebarTarget: string | null;
   panelTitle: string;
   panelDescription: string;
-  hasPageOverlay: boolean;
   nextLabel: string;
   backLabel?: string;
 }
@@ -28,7 +27,7 @@ export const TOUR_STEPS: TourStep[] = [
     panelTitle: "Your command center",
     panelDescription:
       "This is your dashboard home. The six cards are quick shortcuts to Optibot's core features. Below them, you'll find real-time insights and recent PR activity from your connected GitHub repos.",
-    hasPageOverlay: false,
+
     nextLabel: "Show me Optibot →",
     backLabel: "← Back",
   },
@@ -39,7 +38,7 @@ export const TOUR_STEPS: TourStep[] = [
     panelTitle: "Meet Optibot",
     panelDescription:
       "Optibot is your AI code reviewer. It reads your entire codebase before reviewing each PR — not just the diff. Use this page to trigger manual reviews, configure its behaviour, and see what it's reviewed recently.",
-    hasPageOverlay: true,
+
     nextLabel: "Explore Repo Insights →",
     backLabel: "← Back",
   },
@@ -50,7 +49,7 @@ export const TOUR_STEPS: TourStep[] = [
     panelTitle: "Understand your codebase",
     panelDescription:
       "Repo Insights shows how Optibot is affecting your team's velocity. Track merge time trends, review frequency, and security issue detection. Use the repository and time range selectors to drill into specific repos or periods.",
-    hasPageOverlay: true,
+
     nextLabel: "Go to Settings →",
     backLabel: "← Back",
   },
@@ -61,7 +60,7 @@ export const TOUR_STEPS: TourStep[] = [
     panelTitle: "Fine-tune Optibot",
     panelDescription:
       "Settings is where you control how Optibot behaves across your workspace. The review settings you configured during onboarding live here — you can change them any time. You'll also find your API key and webhook configuration.",
-    hasPageOverlay: true,
+
     nextLabel: "See Guidelines →",
     backLabel: "← Back",
   },
@@ -72,7 +71,7 @@ export const TOUR_STEPS: TourStep[] = [
     panelTitle: "Teach Optibot your rules",
     panelDescription:
       "Guidelines are natural-language instructions for Optibot. Tell it what your team cares about — security patterns to flag, style rules to enforce, or files to ignore. Optibot reads these before every review.",
-    hasPageOverlay: true,
+
     nextLabel: "View Codebase Map →",
     backLabel: "← Back",
   },
@@ -83,7 +82,7 @@ export const TOUR_STEPS: TourStep[] = [
     panelTitle: "See your whole codebase",
     panelDescription:
       "The Codebase Map shows your repository as an interactive treemap. Each rectangle is a file — sized by lines of code, coloured by Optibot's review coverage or issue density. Click any directory to zoom in.",
-    hasPageOverlay: true,
+
     nextLabel: "Finish tour",
     backLabel: "← Back",
   },

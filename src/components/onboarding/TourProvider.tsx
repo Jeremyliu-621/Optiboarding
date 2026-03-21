@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { TourContext } from "./TourContext";
 import { TOUR_STEPS } from "./TourTypes";
 import { TourPanel } from "./TourPanel";
-import { PageOverlayDisplay } from "./PageOverlayDisplay";
 
 interface TourProviderProps {
   children: React.ReactNode;
@@ -110,7 +109,6 @@ export function TourProvider({
       {children}
       {isActive && currentTourStep && (
         <>
-          <PageOverlayDisplay />
           <TourPanel step={currentTourStep} stepNumber={currentStep} totalSteps={TOUR_STEPS.length} />
         </>
       )}

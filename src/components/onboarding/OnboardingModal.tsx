@@ -36,148 +36,122 @@ export function OnboardingModal({
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
-          {/* Layer 1: Dark backdrop */}
+          {/* Layer 1: Base dark overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="fixed inset-0 z-[60]"
-            style={{ background: "rgba(0,0,0,0.55)" }}
+            style={{ background: "rgba(8, 4, 20, 0.65)" }}
             onClick={onClose}
           />
 
-          {/* Layer 2: Flowing gradient aurora — draws eye toward the modal */}
+          {/* Layer 2: Gradient aurora + quarter-circle arcs */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="fixed inset-0 z-[60] pointer-events-none"
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            className="fixed inset-0 z-[60] pointer-events-none overflow-hidden"
           >
-            {/* Primary gradient flow: bottom-left to center-right */}
+            {/* Main flowing gradient — vivid violet/rose from bottom-left, blue-purple from top-right */}
             <div
               className="absolute inset-0"
               style={{
                 background: [
-                  "radial-gradient(ellipse 70% 60% at 20% 85%, hsla(275, 50%, 40%, 0.35), transparent 70%)",
-                  "radial-gradient(ellipse 60% 50% at 80% 20%, hsla(275, 40%, 50%, 0.20), transparent 70%)",
-                  "radial-gradient(ellipse 50% 40% at 50% 50%, hsla(290, 45%, 35%, 0.15), transparent 60%)",
-                  "radial-gradient(ellipse 40% 50% at 15% 30%, hsla(320, 40%, 40%, 0.12), transparent 60%)",
-                  "radial-gradient(ellipse 35% 40% at 85% 75%, hsla(260, 50%, 45%, 0.18), transparent 60%)",
+                  "radial-gradient(ellipse 90% 80% at 10% 95%, hsla(280, 80%, 55%, 0.55), transparent 60%)",
+                  "radial-gradient(ellipse 70% 65% at 90% 10%, hsla(250, 70%, 60%, 0.45), transparent 55%)",
+                  "radial-gradient(ellipse 60% 50% at 50% 50%, hsla(275, 60%, 50%, 0.25), transparent 50%)",
+                  "radial-gradient(ellipse 50% 45% at 5% 30%, hsla(310, 70%, 55%, 0.35), transparent 50%)",
+                  "radial-gradient(ellipse 50% 50% at 95% 75%, hsla(265, 75%, 58%, 0.40), transparent 50%)",
                 ].join(", "),
               }}
             />
 
-            {/* Quarter-circle arcs — geometric brand elements */}
+            {/* Quarter-circle arcs — bottom-left corner */}
             <svg
-              className="absolute inset-0 w-full h-full"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-            >
-              {/* Bottom-left arc — large, sweeps upward */}
-              <path
-                d="M 0 100% Q 0 65%, 35% 65%"
-                fill="none"
-                stroke="hsla(275, 45%, 55%, 0.12)"
-                strokeWidth="1"
-                vectorEffect="non-scaling-stroke"
-              />
-              <path
-                d="M 0 100% Q 0 58%, 42% 58%"
-                fill="none"
-                stroke="hsla(275, 45%, 55%, 0.07)"
-                strokeWidth="1"
-                vectorEffect="non-scaling-stroke"
-              />
-
-              {/* Top-right arc — complementary sweep */}
-              <path
-                d="M 100% 0 Q 100% 35%, 65% 35%"
-                fill="none"
-                stroke="hsla(275, 40%, 60%, 0.10)"
-                strokeWidth="1"
-                vectorEffect="non-scaling-stroke"
-              />
-              <path
-                d="M 100% 0 Q 100% 42%, 58% 42%"
-                fill="none"
-                stroke="hsla(275, 40%, 60%, 0.06)"
-                strokeWidth="1"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-
-            {/* Quarter-circle arcs with viewBox for proper scaling */}
-            <svg
-              className="absolute bottom-0 left-0 w-[55%] h-[55%]"
+              className="absolute bottom-0 left-0"
+              style={{ width: "60vw", height: "60vh" }}
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
               fill="none"
             >
               <path
-                d="M 0 100 Q 0 30, 100 30"
-                stroke="hsla(275, 45%, 55%, 0.13)"
+                d="M 0 100 Q 0 20, 100 20"
+                stroke="hsla(275, 70%, 70%, 0.35)"
+                strokeWidth="0.5"
+              />
+              <path
+                d="M 0 100 Q 0 40, 100 40"
+                stroke="hsla(290, 65%, 65%, 0.25)"
                 strokeWidth="0.4"
               />
               <path
-                d="M 0 100 Q 0 45, 100 45"
-                stroke="hsla(290, 40%, 50%, 0.08)"
-                strokeWidth="0.3"
-              />
-              <path
-                d="M 0 100 Q 0 60, 100 60"
-                stroke="hsla(320, 35%, 50%, 0.06)"
-                strokeWidth="0.3"
+                d="M 0 100 Q 0 58, 100 58"
+                stroke="hsla(310, 55%, 62%, 0.18)"
+                strokeWidth="0.35"
               />
             </svg>
 
+            {/* Quarter-circle arcs — top-right corner */}
             <svg
-              className="absolute top-0 right-0 w-[45%] h-[45%]"
+              className="absolute top-0 right-0"
+              style={{ width: "50vw", height: "50vh" }}
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
               fill="none"
             >
               <path
-                d="M 100 0 Q 100 70, 0 70"
-                stroke="hsla(275, 40%, 60%, 0.10)"
-                strokeWidth="0.4"
+                d="M 100 0 Q 100 80, 0 80"
+                stroke="hsla(260, 65%, 70%, 0.30)"
+                strokeWidth="0.5"
               />
               <path
                 d="M 100 0 Q 100 55, 0 55"
-                stroke="hsla(260, 45%, 55%, 0.06)"
-                strokeWidth="0.3"
+                stroke="hsla(250, 60%, 65%, 0.20)"
+                strokeWidth="0.4"
               />
             </svg>
 
-            {/* Subtle warm accent glow — rose/magenta, very faint */}
+            {/* Vivid colored orbs */}
             <div
-              className="absolute"
+              className="absolute rounded-full"
               style={{
-                left: "5%",
-                bottom: "15%",
-                width: "300px",
-                height: "300px",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, hsla(330, 50%, 45%, 0.12), transparent 70%)",
-                filter: "blur(40px)",
+                left: "0%",
+                bottom: "5%",
+                width: "500px",
+                height: "500px",
+                background: "radial-gradient(circle, hsla(300, 70%, 60%, 0.30), transparent 60%)",
+                filter: "blur(80px)",
               }}
             />
             <div
-              className="absolute"
+              className="absolute rounded-full"
               style={{
-                right: "10%",
-                top: "10%",
-                width: "250px",
-                height: "250px",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, hsla(260, 60%, 50%, 0.10), transparent 70%)",
-                filter: "blur(50px)",
+                right: "0%",
+                top: "0%",
+                width: "450px",
+                height: "450px",
+                background: "radial-gradient(circle, hsla(250, 80%, 65%, 0.28), transparent 60%)",
+                filter: "blur(70px)",
+              }}
+            />
+            {/* Center warm glow */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                left: "30%",
+                top: "35%",
+                width: "400px",
+                height: "400px",
+                background: "radial-gradient(circle, hsla(275, 55%, 55%, 0.15), transparent 55%)",
+                filter: "blur(60px)",
               }}
             />
           </motion.div>
 
-          {/* Layer 3: The modal itself */}
+          {/* Layer 3: The modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -189,7 +163,7 @@ export function OnboardingModal({
               left: "44px",
               right: "44px",
               bottom: "44px",
-              boxShadow: "0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.06)",
+              boxShadow: "0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.08)",
             }}
           >
             {/* Top bar: Logo + Progress */}

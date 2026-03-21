@@ -32,18 +32,6 @@ export default function JiraIntegrationPage() {
       />
 
       <div className="space-y-8">
-        {/* Feature cards */}
-        <div>
-          <h3 className="text-[14px] font-medium text-[var(--text-primary)] mb-4">
-            What You&apos;ll Get
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {jiraFeatures.map((f) => (
-              <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} iconColor="hsl(210, 60%, 55%)" iconBg="hsl(210, 25%, 17%)" />
-            ))}
-          </div>
-        </div>
-
         {/* Connect form */}
         <div className="bg-[var(--bg-surface)] rounded-[8px] p-6 max-w-lg">
           <p className="text-[14px] font-medium text-[var(--text-primary)] mb-4">Connect Jira</p>
@@ -90,6 +78,18 @@ export default function JiraIntegrationPage() {
               )}
             </div>
           </form>
+        </div>
+
+        {/* Feature cards */}
+        <div>
+          <h3 className="text-[14px] font-medium text-[var(--text-primary)] mb-4">
+            What You&apos;ll Get
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {jiraFeatures.map((f) => (
+              <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} iconColor="hsl(210, 60%, 55%)" iconBg="hsl(210, 25%, 17%)" />
+            ))}
+          </div>
         </div>
       </div>
     </>

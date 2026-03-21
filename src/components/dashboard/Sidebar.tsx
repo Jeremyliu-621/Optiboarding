@@ -40,8 +40,6 @@ interface NavItemDef {
 
 interface NavSection {
   heading: string;
-  icon: React.ElementType;
-  href?: string;
   items: NavItemDef[];
 }
 
@@ -54,8 +52,6 @@ const topNav: NavItemDef[] = [
 const sections: NavSection[] = [
   {
     heading: "Integrations",
-    icon: SlidersHorizontal,
-    href: "/dashboard/integrations",
     items: [
       { label: "GitHub", icon: Github, href: "/dashboard/integrations/github" },
       { label: "GitLab", icon: GitlabIcon, href: "/dashboard/integrations/gitlab" },
@@ -65,8 +61,6 @@ const sections: NavSection[] = [
   },
   {
     heading: "Configuration",
-    icon: SlidersHorizontal,
-    href: "/dashboard/configuration",
     items: [
       { label: "Settings", icon: SlidersHorizontal, href: "/dashboard/configuration/settings" },
       { label: "Guidelines", icon: FileText, href: "/dashboard/configuration/guidelines" },
@@ -168,18 +162,9 @@ function SectionGroup({
 
   return (
     <div>
-      {section.href ? (
-        <Link
-          href={section.href}
-          className="block px-3 py-[6px] text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
-        >
-          {section.heading}
-        </Link>
-      ) : (
-        <p className="px-3 py-[6px] text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-          {section.heading}
-        </p>
-      )}
+      <p className="px-3 py-[6px] text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+        {section.heading}
+      </p>
       <div className="space-y-0.5">
         {section.items.map((item) => (
           <NavItem
