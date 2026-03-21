@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { useTour } from "./TourContext";
 import { TourStep } from "./TourTypes";
 
@@ -80,10 +80,9 @@ export function TourPanel({ step, stepNumber, totalSteps }: TourPanelProps) {
           {stepNumber > 1 && (
             <button
               onClick={goBack}
-              className="flex items-center gap-1 text-[13px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors cursor-pointer"
+              className="text-[13px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors cursor-pointer"
             >
-              <ChevronLeft size={14} />
-              <span>Back</span>
+              ← Back
             </button>
           )}
 
